@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { elements, getElement, defaultElementId, type ElementId, type QuestionKey } from "@/lib/elements";
 import { demoProduct } from "@/lib/products";
-import { findDemoResult, type Reply } from "@/lib/results";
+import { findDemoResult, type SavedResult } from "@/lib/results";
 import { AppHeader } from "./AppHeader";
 import { Button } from "./Button";
 import { Dropdown } from "./Dropdown";
@@ -20,9 +20,9 @@ const DEMO_DELAY_MS = 1500;
 type Screen =
   | { kind: "empty" }
   | { kind: "loading" }
-  | { kind: "results"; reply: Reply }
+  | { kind: "results"; result: SavedResult }
   | { kind: "error" }
-  /** No saved results for this element yet (slice 4 adds the other 8). */
+  /** No saved results for this product and element (a fallback for products added in slice 6). */
   | { kind: "not-saved"; elementLabel: string };
 
 /** Add ?demo=error to the address to see the error state; nothing can really fail in the demo. */
@@ -53,8 +53,8 @@ export function WriteScreen() {
       return;
     }
 
-    const reply = findDemoResult(product.id, element.id);
-    if (!reply) {
+    const result = findDemoResult(product.id, element.id);
+    if (!result) {
       setScreen({ kind: "not-saved", elementLabel: element.label });
       return;
     }
@@ -62,14 +62,14 @@ export function WriteScreen() {
     setScreen({ kind: "loading" });
     clearTimeout(timer.current);
     timer.current = setTimeout(() => {
-      setScreen(demoShouldFail() ? { kind: "error" } : { kind: "results", reply });
+      setScreen(demoShouldFail() ? { kind: "error" } : { kind: "results", result });
     }, DEMO_DELAY_MS);
   }
 
   // One live region for status changes, so screen readers hear each one once.
   const announcement =
     screen.kind === "loading" ? "Writing your copy…"
-    : screen.kind === "results" ? "Three approaches are ready."
+    : screen.kind === "results" ? "Your copy is ready: three options."
     : "";
 
   return (
@@ -158,13 +158,9 @@ export function WriteScreen() {
 
             {screen.kind === "results" && (
               <>
-                <div className="flex flex-col gap-1">
-                  <h2 className="text-subheading-18-bold">Three approaches</h2>
-                  <p className="text-caption-14 text-grey-secondary">
-                    {product.name}’s voice · Example results written by Claude while testing
-                  </p>
-                </div>
-                {screen.reply.options.map((o) => (
+                <h2 className="text-subheading-18-bold">Three ways to say it</h2>
+
+                {screen.result.reply.options.map((o) => (
                   <ResultCard
                     key={o.approach}
                     label={o.approach}
@@ -173,6 +169,24 @@ export function WriteScreen() {
                     parts={o.parts}
                   />
                 ))}
+
+                {screen.result.reply.left_out.length > 0 && (
+                  <section aria-labelledby="left-out-title" className="flex flex-col gap-2 pt-2">
+                    <h3 id="left-out-title" className="text-caption-14-bold text-grey-main">
+                      Left out on purpose
+                    </h3>
+                    <ul className="flex list-disc flex-col gap-1 pl-4 text-caption-14 text-grey-secondary">
+                      {screen.result.reply.left_out.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  </section>
+                )}
+
+                {/* Required by the brief's Honesty rule: say these are saved examples, and nothing is sent. */}
+                <p className="text-caption-12 text-grey-secondary">
+                  Saved examples written by Claude. Your text stays in your browser.
+                </p>
               </>
             )}
 
@@ -197,8 +211,8 @@ export function WriteScreen() {
             {screen.kind === "not-saved" && (
               <div role="status">
                 <EmptyState title={`No saved examples for ${screen.elementLabel} yet`} headingLevel={2}>
-                  This demo only has saved results for Error message so far. Pick Error message in the Element list
-                  to see three approaches.
+                  This demo has saved results for {product.name} only for some elements. Pick another element to
+                  see three approaches.
                 </EmptyState>
               </div>
             )}

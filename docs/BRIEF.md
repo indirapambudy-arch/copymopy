@@ -10,7 +10,7 @@ Done means:
 
 - A public URL where someone can set up a product, pick any of the 9 elements, see three approaches, refine one option and copy it.
 - Results are real Claude output from the Prompt lab (instructions version v-3500), saved as demo data. No API key, no running costs.
-- The site says so plainly: "Example results written by Claude while testing."
+- The site says so plainly, in one note under the results: "Saved examples written by Claude. Your text stays in your browser."
 - It matches the Copymopy design system and the canvas, works at phone width and passes basic accessibility checks.
 - The data shape matches the AI's reply shape, so live AI can be switched on later without redesigning anything.
 
@@ -55,14 +55,14 @@ Layouts and copy are in `docs/canvas/`.
 | --- | --- | --- |
 | Onboarding | Product name and "What does it do, and who uses it?" (both required), Brand personality chips (up to 3), "Anything else about your voice? (optional)", Continue, "You can change these anytime" | Empty, error on a missing required field, filled |
 | Write | Header with Logo and the "Writing for" product menu. Left (white): "Start writing", Element dropdown, questions that change with the element, voice line ("Using Ledgerly's voice: Calm, Clear, Direct · Edit"), Write copy. Right (grey): results | Empty ("Your copy will show up here"), loading, results, error |
-| Results | Three approach cards: name, Recommended pill on one, parts with labels, one-line reason, refine actions (Shorter, More casual, More formal, Try again), Undo, Copy. A line on which facts it used, and "Left out on purpose" | Refining one card, copied |
+| Results | Heading "Three ways to say it", then three approach cards: name, Recommended pill on one, parts with labels, one-line reason, refine actions (Shorter, More casual, More formal, Try again), Undo, Copy. "Left out on purpose", then the demo note in small grey text. No other lines under the heading | Refining one card, copied |
 | Products | Product menu in the header. About the product (name and description, both required) and Voice (personality chips, notes). Save bar always at the bottom with Save changes; "Unsaved changes" and Discard appear when something changed | Saved, unsaved changes, saved toast |
 
 Navigation: Onboarding → Write. The product menu switches products, opens Add product (onboarding) and Edit product (Products). Products → Back to writing.
 
 ## Demo data and the AI
 
-Version 1 makes no API calls. Write copy shows the loading state for about 1.5 seconds, then the saved results for the selected element and product. The results header says "Example results written by Claude while testing".
+Version 1 makes no API calls. Write copy shows the loading state for about 1.5 seconds, then the saved results for the selected element and product. A small note after the results says "Saved examples written by Claude. Your text stays in your browser."
 
 How the demo data is collected, at no cost:
 
@@ -71,7 +71,7 @@ How the demo data is collected, at no cost:
 3. Copy the log and paste it into Claude Code, which turns the best run per element into `data/demo-results.json`.
 4. For the refine actions (Shorter, More casual, More formal, Try again), Claude Code writes one variant per action for each option, following `prompts/write.md`. Stored in the same file.
 
-When a visitor types their own situation, show the saved results for that element and a short note: "This demo shows saved examples. Your text isn't sent anywhere."
+When a visitor types their own situation, show the saved results for that element. The demo note above covers both points (saved examples, nothing sent).
 
 Elements, their parts, length guidance and questions:
 
@@ -102,7 +102,7 @@ Each slice ends with a commit, a push and a working Vercel link. One slice per s
 1. **Foundation.** Next.js + Tailwind, tokens in the Tailwind theme, Inter loaded, Button, IconButton, Icon, Logo. Deploy the empty app to Vercel.
 2. **Static Write screen.** Header, Element dropdown, questions per element, voice line, Write copy, the empty state.
 3. **Demo results for Error messages.** `data/demo-results.json` with the Error message results, ResultCard with parts, badge and reason, the loading and error states.
-4. **All elements.** Saved results for the other 8 elements, plus `left_out` under the results and the demo note.
+4. **All elements.** Saved results for the other 8 elements, plus `left_out` under the results and the demo note. `npm run demo-data` rebuilds `data/demo-results.json` from the Prompt lab log in `data/prompt-lab-log.json`.
 5. **Refine.** Saved variants for Shorter, More casual, More formal and Try again, Undo on one card at a time; Copy with the Copied state.
 6. **Products.** Onboarding, the product menu, the Products page with the save bar. Name and description are required. Saved in localStorage.
 7. **Polish.** Everything in Guardrails, then a final deploy.
@@ -115,7 +115,7 @@ Running costs are zero: no API key, free Vercel and GitHub plans, and Claude Cod
 
 | Area | Rule |
 | --- | --- |
-| Honesty | Say on the site that results are saved examples written by Claude while testing. Never imply a visitor's text is being processed. |
+| Honesty | Say on the site that results are saved examples written by Claude (the demo note under the results). Never imply a visitor's text is being processed. |
 | Privacy | Nothing a visitor types leaves their browser. |
 | Accessibility | Visible focus on every control, labels on every field, errors announced, loading announced, Copy works by keyboard, contrast as in the design system's notes. |
 | Mobile | Write stacks to one column under 900px; the save bar and menus stay usable at 400px wide. |
@@ -127,3 +127,4 @@ Running costs are zero: no API key, free Vercel and GitHub plans, and Claude Cod
 - "Paste it to improve" moves to a later version.
 - No screenshot context in v1.
 - The design system README still mentions tone chips and pasting copy; those predate these decisions. Follow this brief.
+- Results header simplified: the heading is "Three ways to say it" with nothing under it. The voice line, the "written for" line and the two demo lines were removed; one note after "Left out on purpose" keeps the Honesty rule.

@@ -5,37 +5,137 @@
   },
   "runs": [
     {
-      "at": "2026-11-09T11:56:27.017Z",
-      "version": "v-3500",
-      "case": "IBAN field",
-      "product": "Ledgerly",
-      "element": "Helper text",
-      "inputs": {
-        "what": "IBAN for reimbursements",
-        "next": "Adding spaces or leaving out the country code"
-      },
+      "at": "2026-11-09T12:28:46.766Z", "version": "v-3500", "case": "Own case", "product": "Ledgerly", "element": "Body text",
+      "inputs": { "what": "How expense approvals work for managers", "next": "Apporvals go to the right person immediately" },
       "options": [
-        {
-          "approach": "Direct",
-          "recommended": true,
-          "why": "Pick this for most screens: it states the format rule plainly in one line.",
-          "parts": [{ "label": "Text", "text": "Start with the two-letter country code, like DE or GB." }],
-          "score": { "voice": true }
-        },
-        {
-          "approach": "Example-led",
-          "recommended": false,
-          "why": "Pick this when seeing a real format helps more than reading a rule.",
-          "parts": [{ "label": "Text", "text": "Include the country code at the start, for example GB29NWBK60161331926819." }],
-          "score": {}
-        },
-        {
-          "approach": "Reassuring",
-          "recommended": false,
-          "why": "Pick this when spaces are the main mistake and you want to ease worry.",
-          "parts": [{ "label": "Text", "text": "Enter the full IBAN, starting with the country code. Spaces are fine." }],
-          "score": { "voice": true, "facts": true }
-        }
+        { "approach": "Direct", "recommended": true, "why": "Pick this for most screens where managers need the point fast on a phone.",
+          "parts": [{ "label": "Body", "text": "When an employee submits an expense, it goes to the right approver immediately. You review it and decide." }], "score": {} },
+        { "approach": "Reassuring", "recommended": false, "why": "Pick this for first-time setup or onboarding, where managers want confidence in the process.",
+          "parts": [{ "label": "Body", "text": "You don't need to chase anything. Each expense goes to the right person as soon as it's submitted." }], "score": {} },
+        { "approach": "Concise", "recommended": false, "why": "Pick this for tight mobile spaces like banners, empty states or tooltips.",
+          "parts": [{ "label": "Body", "text": "Approvals go to the right person immediately." }], "score": { "voice": true, "facts": true, "fits": true, "distinct": true } }
+      ],
+      "left_out": [
+        "How 'the right person' is decided (for example, by team, amount or manager). Not provided, so the copy doesn't say.",
+        "What approvers can do beyond reviewing and deciding (for example, reject, comment or request changes). Not provided.",
+        "Whether approvers are notified, and how. Not provided, so no notification is promised."
+      ]
+    },
+    {
+      "at": "2026-11-09T12:17:12.108Z", "version": "v-3500", "case": "Own case", "product": "Ledgerly", "element": "Toast",
+      "inputs": { "what": "Expense approved", "next": "Create their first invoice" },
+      "options": [
+        { "approach": "Direct", "recommended": true, "why": "Pick this for most screens: it states the result plainly and fits a quick approval flow.",
+          "parts": [{ "label": "Message", "text": "Expense approved" }], "score": { "voice": true, "facts": true, "fits": true, "distinct": true, "ship": true } },
+        { "approach": "Reassuring", "recommended": false, "why": "Pick this when you want to signal the action is complete and no further step is needed.",
+          "parts": [{ "label": "Message", "text": "Done. You approved this expense." }], "score": {} },
+        { "approach": "Concise", "recommended": false, "why": "Pick this for batch approvals on small phone screens where space and attention are tight.",
+          "parts": [{ "label": "Message", "text": "You approved it" }], "score": {} }
+      ],
+      "left_out": [
+        "Did not mention notifying the employee, payment timing, or next steps, since none were listed as facts.",
+        "Did not include the expense name or amount; adding them would help in batch approvals if the toast can show them.",
+        "Did not add an undo reference because it's unknown whether undo exists."
+      ]
+    },
+    {
+      "at": "2026-11-09T12:16:00.388Z", "version": "v-3500", "case": "Own case", "product": "Ledgerly", "element": "Empty state",
+      "inputs": { "what": "A new account has no invoices yet", "next": "Create their first invoice" },
+      "options": [
+        { "approach": "Direct", "recommended": true, "why": "Pick this for most screens where you want a clear, fast path to the first invoice.",
+          "parts": [
+            { "label": "Heading", "text": "No invoices yet" },
+            { "label": "Body", "text": "Create your first invoice to get started." },
+            { "label": "Button", "text": "Create invoice" }
+          ], "score": { "voice": true, "distinct": true, "fits": true, "facts": true } },
+        { "approach": "Reassuring", "recommended": false, "why": "Pick this when new accounts may wonder whether something is missing or broken.",
+          "parts": [
+            { "label": "Heading", "text": "Nothing here yet" },
+            { "label": "Body", "text": "This is normal for a new account, so create your first invoice when you're ready." },
+            { "label": "Button", "text": "Create invoice" }
+          ], "score": {} },
+        { "approach": "Concise", "recommended": false, "why": "Pick this for small mobile screens where space is tight and the action is obvious.",
+          "parts": [
+            { "label": "Heading", "text": "Start with an invoice" },
+            { "label": "Body", "text": "Create an invoice and it will appear here." },
+            { "label": "Button", "text": "Create invoice" }
+          ], "score": { "voice": true, "fits": true, "distinct": true } }
+      ],
+      "left_out": [
+        "Did not mention what happens after an invoice is created (such as approval steps, notifications, or where it is stored), since those behaviors weren't provided.",
+        "Did not mention required fields, invoice import options, or how long setup takes, as none were given.",
+        "The Concise option says the invoice will appear on this screen; confirm that matches product behavior."
+      ]
+    },
+    {
+      "at": "2026-11-09T12:15:01.189Z", "version": "v-3500", "case": "Own case", "product": "Ledgerly", "element": "Button",
+      "inputs": { "what": "Expense approved", "next": "An email is sent to the employee who asked for the approval" },
+      "options": [
+        { "approach": "Direct", "recommended": true, "why": "Pick this for the main approval action on most screens, where speed matters.",
+          "parts": [{ "label": "Label", "text": "Approve expense" }], "score": { "voice": true, "facts": true, "fits": true, "distinct": true, "ship": true } },
+        { "approach": "Concise", "recommended": false, "why": "Pick this on small mobile screens or lists where space is tight.",
+          "parts": [{ "label": "Label", "text": "Approve" }], "score": {} },
+        { "approach": "Confirming", "recommended": false, "why": "Pick this when a final step needs to make the commitment explicit.",
+          "parts": [{ "label": "Label", "text": "Confirm approval" }], "score": {} }
+      ],
+      "left_out": [
+        "Did not mention what happens after approval (payment, notifications, reimbursement timing) because none of it was listed.",
+        "Did not state whether approval can be undone, since that behavior was not provided."
+      ]
+    },
+    {
+      "at": "2026-11-09T12:14:27.917Z", "version": "v-3500", "case": "Own case", "product": "Ledgerly", "element": "Success message",
+      "inputs": { "what": "Expense approved", "next": "An email is sent to the employee who asked for the approval" },
+      "options": [
+        { "approach": "Direct", "recommended": true, "why": "Pick this for most screens, where finance managers want fast, clear confirmation.",
+          "parts": [
+            { "label": "Title", "text": "Expense approved" },
+            { "label": "Body", "text": "We're sending an email to the employee who asked for the approval." }
+          ], "score": { "voice": true, "facts": true, "fits": true, "distinct": true, "ship": true } },
+        { "approach": "Reassuring", "recommended": false, "why": "Pick this when you want to confirm the handoff so you can move on.",
+          "parts": [
+            { "label": "Title", "text": "You approved it" },
+            { "label": "Body", "text": "The employee who asked for approval will get an email, so you don't need to tell them." }
+          ], "score": {} },
+        { "approach": "Concise", "recommended": false, "why": "Pick this for small mobile toasts or banners where space is tight.",
+          "parts": [
+            { "label": "Title", "text": "Approved" },
+            { "label": "Body", "text": "The employee will get an email." }
+          ], "score": {} }
+      ],
+      "left_out": [
+        "No timing for the email (for example, how soon it arrives), since none was given.",
+        "No mention of the email's contents, the employee's name, or the expense amount, since these weren't provided.",
+        "No claim about the expense's next status, such as payment or reimbursement, since that wasn't listed."
+      ]
+    },
+    {
+      "at": "2026-11-09T12:13:03.003Z", "version": "v-3500", "case": "Own case", "product": "Ledgerly", "element": "Body text",
+      "inputs": { "what": "How expense approval works", "next": "Approval goes to the right person immediately" },
+      "options": [
+        { "approach": "Direct", "recommended": true, "why": "Pick this for most screens where finance managers need the process fast.",
+          "parts": [{ "label": "Body", "text": "When an employee submits an expense, it goes to the right approver immediately. You review it and approve or decline." }], "score": {} },
+        { "approach": "Reassuring", "recommended": false, "why": "Pick this for first-time or onboarding screens where people want confidence in the process.",
+          "parts": [{ "label": "Body", "text": "You don't need to route anything yourself. Each expense goes to the right person as soon as it's submitted." }], "score": {} },
+        { "approach": "Concise", "recommended": false, "why": "Pick this for small mobile spaces like tooltips or inline helper text.",
+          "parts": [{ "label": "Body", "text": "Submitted expenses go straight to the right approver." }], "score": { "voice": true, "distinct": true, "ship": true, "facts": true, "fits": true } }
+      ],
+      "left_out": [
+        "How the right approver is determined (for example, by role, team, or amount), since no routing rules were provided.",
+        "Whether approvers get notifications, and any deadlines or timelines for approval.",
+        "What happens after approval or decline, such as reimbursement timing, since no facts were given."
+      ]
+    },
+    {
+      "at": "2026-11-09T11:56:27.017Z", "version": "v-3500", "case": "IBAN field", "product": "Ledgerly", "element": "Helper text",
+      "inputs": { "what": "IBAN for reimbursements", "next": "Adding spaces or leaving out the country code" },
+      "options": [
+        { "approach": "Direct", "recommended": true, "why": "Pick this for most screens: it states the format rule plainly in one line.",
+          "parts": [{ "label": "Text", "text": "Start with the two-letter country code, like DE or GB." }], "score": { "voice": true } },
+        { "approach": "Example-led", "recommended": false, "why": "Pick this when seeing a real format helps more than reading a rule.",
+          "parts": [{ "label": "Text", "text": "Include the country code at the start, for example GB29NWBK60161331926819." }], "score": {} },
+        { "approach": "Reassuring", "recommended": false, "why": "Pick this when spaces are the main mistake and you want to ease worry.",
+          "parts": [{ "label": "Text", "text": "Enter the full IBAN, starting with the country code. Spaces are fine." }], "score": { "voice": true, "facts": true } }
       ],
       "left_out": [
         "I don't know whether the field accepts or strips spaces, so the Direct and Example-led options don't mention them.",
@@ -44,49 +144,27 @@
       ]
     },
     {
-      "at": "2026-11-09T11:55:32.250Z",
-      "version": "v-3500",
-      "case": "Own case",
-      "product": "Pawpal",
-      "element": "Error message",
-      "inputs": {
-        "what": "There's no available dog walkers and sitters",
-        "next": "Find the next available time"
-      },
+      "at": "2026-11-09T11:55:32.250Z", "version": "v-3500", "case": "Own case", "product": "Pawpal", "element": "Error message",
+      "inputs": { "what": "There's no available dog walkers and sitters", "next": "Find the next available time" },
       "options": [
-        {
-          "approach": "Direct",
-          "recommended": true,
-          "why": "Pick this for most screens, where busy owners need the facts and next step fast.",
+        { "approach": "Direct", "recommended": true, "why": "Pick this for most screens, where busy owners need the facts and next step fast.",
           "parts": [
             { "label": "Title", "text": "No walkers available" },
             { "label": "Body", "text": "No dog walkers or sitters are free right now. Try the next available time." },
             { "label": "Button", "text": "Find next time" }
-          ],
-          "score": { "voice": true, "fits": true, "distinct": true, "facts": true }
-        },
-        {
-          "approach": "Reassuring",
-          "recommended": false,
-          "why": "Pick this when owners may feel stressed about a last-minute booking.",
+          ], "score": { "voice": true, "fits": true, "distinct": true, "facts": true } },
+        { "approach": "Reassuring", "recommended": false, "why": "Pick this when owners may feel stressed about a last-minute booking.",
           "parts": [
             { "label": "Title", "text": "Nobody's free just yet" },
             { "label": "Body", "text": "No walkers or sitters are available for this time. Let's find your next best slot." },
             { "label": "Button", "text": "See next time" }
-          ],
-          "score": { "voice": true, "fits": true }
-        },
-        {
-          "approach": "Playful",
-          "recommended": false,
-          "why": "Pick this for lighter moments where the brand's playful side can shine.",
+          ], "score": { "voice": true, "fits": true } },
+        { "approach": "Playful", "recommended": false, "why": "Pick this for lighter moments where the brand's playful side can shine.",
           "parts": [
             { "label": "Title", "text": "All paws are busy" },
             { "label": "Body", "text": "Every walker and sitter is booked right now. Pick the next open time." },
             { "label": "Button", "text": "Find next time" }
-          ],
-          "score": { "voice": true, "facts": true, "fits": true, "distinct": true }
-        }
+          ], "score": { "voice": true, "facts": true, "fits": true, "distinct": true } }
       ],
       "left_out": [
         "Did not mention how far ahead the next available time is, since no timeline was given.",
@@ -95,37 +173,15 @@
       ]
     },
     {
-      "at": "2026-11-09T09:10:03.054Z",
-      "version": "v-3500",
-      "case": "Own case",
-      "product": "Ledgerly",
-      "element": "Headline",
-      "inputs": {
-        "what": "This is a headline for when a startup founder wants to add their company",
-        "next": "It only takes a second to add a company and it's free"
-      },
+      "at": "2026-11-09T09:10:03.054Z", "version": "v-3500", "case": "Own case", "product": "Ledgerly", "element": "Headline",
+      "inputs": { "what": "This is a headline for when a startup founder wants to add their company", "next": "It only takes a second to add a company and it's free" },
       "options": [
-        {
-          "approach": "Direct",
-          "recommended": true,
-          "why": "Pick this for most screens: it states the action plainly for busy founders.",
-          "parts": [{ "label": "Headline", "text": "Add your company" }],
-          "score": { "voice": true, "facts": true, "fits": true, "distinct": true, "ship": true }
-        },
-        {
-          "approach": "Benefit-led",
-          "recommended": false,
-          "why": "Pick this when you want to stress speed and cost right at the top.",
-          "parts": [{ "label": "Headline", "text": "Add your company in seconds, free" }],
-          "score": { "ship": true, "voice": true, "facts": true, "fits": true, "distinct": true }
-        },
-        {
-          "approach": "Friendly invite",
-          "recommended": false,
-          "why": "Pick this for a warmer first-time moment, like onboarding or an empty state.",
-          "parts": [{ "label": "Headline", "text": "Let's add your company" }],
-          "score": {}
-        }
+        { "approach": "Direct", "recommended": true, "why": "Pick this for most screens: it states the action plainly for busy founders.",
+          "parts": [{ "label": "Headline", "text": "Add your company" }], "score": { "voice": true, "facts": true, "fits": true, "distinct": true, "ship": true } },
+        { "approach": "Benefit-led", "recommended": false, "why": "Pick this when you want to stress speed and cost right at the top.",
+          "parts": [{ "label": "Headline", "text": "Add your company in seconds, free" }], "score": { "ship": true, "voice": true, "facts": true, "fits": true, "distinct": true } },
+        { "approach": "Friendly invite", "recommended": false, "why": "Pick this for a warmer first-time moment, like onboarding or an empty state.",
+          "parts": [{ "label": "Headline", "text": "Let's add your company" }], "score": {} }
       ],
       "left_out": [
         "Did not say what happens after the company is added (for example, applying to accelerators or grants), since no product behavior was listed.",
@@ -133,37 +189,15 @@
       ]
     },
     {
-      "at": "2026-11-09T09:08:31.488Z",
-      "version": "v-3500",
-      "case": "Own case",
-      "product": "Ledgerly",
-      "element": "Tooltip",
-      "inputs": {
-        "what": "This is a tooltip explaining that the information written in the field won't be disclosed publicly",
-        "next": "Try again or use another card"
-      },
+      "at": "2026-11-09T09:08:31.488Z", "version": "v-3500", "case": "Own case", "product": "Ledgerly", "element": "Tooltip",
+      "inputs": { "what": "This is a tooltip explaining that the information written in the field won't be disclosed publicly", "next": "Try again or use another card" },
       "options": [
-        {
-          "approach": "Direct",
-          "recommended": true,
-          "why": "Pick this for most screens where a short, plain statement of privacy is enough.",
-          "parts": [{ "label": "Text", "text": "This information won't be shown publicly." }],
-          "score": { "fits": true, "voice": true }
-        },
-        {
-          "approach": "Reassuring",
-          "recommended": false,
-          "why": "Pick this for sensitive fields where founders may hesitate to share details.",
-          "parts": [{ "label": "Text", "text": "You can enter this with confidence, because it won't be made public." }],
-          "score": { "voice": true }
-        },
-        {
-          "approach": "Concise",
-          "recommended": false,
-          "why": "Pick this when space is tight, such as small fields or mobile layouts.",
-          "parts": [{ "label": "Text", "text": "Not shown publicly." }],
-          "score": {}
-        }
+        { "approach": "Direct", "recommended": true, "why": "Pick this for most screens where a short, plain statement of privacy is enough.",
+          "parts": [{ "label": "Text", "text": "This information won't be shown publicly." }], "score": { "fits": true, "voice": true } },
+        { "approach": "Reassuring", "recommended": false, "why": "Pick this for sensitive fields where founders may hesitate to share details.",
+          "parts": [{ "label": "Text", "text": "You can enter this with confidence, because it won't be made public." }], "score": { "voice": true } },
+        { "approach": "Concise", "recommended": false, "why": "Pick this when space is tight, such as small fields or mobile layouts.",
+          "parts": [{ "label": "Text", "text": "Not shown publicly." }], "score": {} }
       ],
       "left_out": [
         "Who can see this information (for example, accelerators or grant providers reviewing your application), since that wasn't provided.",
@@ -172,49 +206,27 @@
       ]
     },
     {
-      "at": "2026-11-09T08:54:30.819Z",
-      "version": "v-3500",
-      "case": "Card payment failed (no facts)",
-      "product": "Ledgerly",
-      "element": "Error message",
-      "inputs": {
-        "what": "The card payment for a subscription failed at checkout",
-        "next": "Try again or use another card"
-      },
+      "at": "2026-11-09T08:54:30.819Z", "version": "v-3500", "case": "Card payment failed (no facts)", "product": "Ledgerly", "element": "Error message",
+      "inputs": { "what": "The card payment for a subscription failed at checkout", "next": "Try again or use another card" },
       "options": [
-        {
-          "approach": "Direct",
-          "recommended": true,
-          "why": "Pick this for most screens where you want to state the problem and next step plainly.",
+        { "approach": "Direct", "recommended": true, "why": "Pick this for most screens where you want to state the problem and next step plainly.",
           "parts": [
             { "label": "Title", "text": "Payment didn't go through" },
             { "label": "Body", "text": "Your card payment failed at checkout. Try again or use another card." },
             { "label": "Button", "text": "Try again" }
-          ],
-          "score": {}
-        },
-        {
-          "approach": "Reassuring",
-          "recommended": false,
-          "why": "Pick this when the reader may worry about their payment or card.",
+          ], "score": {} },
+        { "approach": "Reassuring", "recommended": false, "why": "Pick this when the reader may worry about their payment or card.",
           "parts": [
             { "label": "Title", "text": "Payment wasn't completed" },
             { "label": "Body", "text": "The card payment didn't go through at checkout. You can try again or choose a different card." },
             { "label": "Button", "text": "Try again" }
-          ],
-          "score": {}
-        },
-        {
-          "approach": "Concise",
-          "recommended": false,
-          "why": "Pick this for small mobile screens, banners or toasts where space is tight.",
+          ], "score": {} },
+        { "approach": "Concise", "recommended": false, "why": "Pick this for small mobile screens, banners or toasts where space is tight.",
           "parts": [
             { "label": "Title", "text": "Card payment failed" },
             { "label": "Body", "text": "Try again, or use another card." },
             { "label": "Button", "text": "Use another card" }
-          ],
-          "score": {}
-        }
+          ], "score": {} }
       ],
       "left_out": [
         "The reason the card payment failed (for example declined, expired or network issue), since it wasn't provided.",

@@ -20,17 +20,19 @@ export interface Reply {
   left_out: string[];
 }
 
-interface SavedResult {
+/** A saved Prompt lab run: the reply, plus the situation it was written for. */
+export interface SavedResult {
   product: string;
   element: string;
   case: string;
   version: string;
+  inputs: { what: string; next?: string; facts?: string };
   reply: Reply;
 }
 
 const saved: SavedResult[] = demo.results;
 
-/** The saved reply for this product and element, or undefined if there isn't one yet. */
-export function findDemoResult(productId: string, element: ElementId): Reply | undefined {
-  return saved.find((r) => r.product === productId && r.element === element)?.reply;
+/** The saved run for this product and element, or undefined if there isn't one yet. */
+export function findDemoResult(productId: string, element: ElementId): SavedResult | undefined {
+  return saved.find((r) => r.product === productId && r.element === element);
 }
