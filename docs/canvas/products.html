@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Products</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/copymopy/tokens.css">
+<link rel="stylesheet" href="ds/copymopy/components/bundle.css">
+<script src="ds/copymopy/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#004fc5}a:hover{color:#003c96}
+.x-root{position:relative;min-height:820px;background:var(--bg-page);color:var(--grey-main);font-family:var(--font-sans);display:flex;flex-direction:column;overflow:hidden}
+.x-head{background:var(--white-main);border-bottom:1px solid var(--grey-tertiary);padding-inline:32px}
+.x-head>div{max-width:1120px;margin:0 auto;min-height:64px;padding-block:12px;box-sizing:border-box;display:flex;align-items:center}
+.x-main{flex-grow:1;padding:32px 64px 48px}
+.x-wrap{max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:24px}
+.x-back{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:14px;line-height:20px;color:#212121;text-decoration:none;border-radius:4px;background:none;border:0;padding:0;cursor:pointer}
+.x-back:hover{color:#212121;text-decoration:underline;text-underline-offset:3px}
+.x-back:focus-visible{outline:2px solid transparent;box-shadow:0 0 0 2px #ffffff,0 0 0 4px #004fc5}
+.x-titlerow{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.x-titlerow h1{margin:0;font-size:28px;line-height:34px;font-weight:600}
+.x-titlerow p{margin:8px 0 0;font-size:16px;line-height:22px;color:var(--grey-secondary)}
+.x-badge{font-size:12px;line-height:16px;font-weight:600;color:var(--green-main);background:#e7f4ec;border-radius:var(--radius-full);padding:2px 8px}
+.x-tag{font-size:12px;line-height:16px;font-weight:600;color:var(--grey-main);background:var(--bg-page);border:1px solid var(--grey-tertiary);border-radius:var(--radius-full);padding:3px 10px}
+.x-use{font-size:14px;line-height:20px;font-weight:600;color:var(--blue-main);background:var(--blue-soft);border-radius:var(--radius-full);padding:2px 8px}
+.x-avoid{font-size:14px;line-height:20px;font-weight:600;color:var(--grey-main);background:var(--bg-page);border:1px solid var(--grey-tertiary);border-radius:var(--radius-full);padding:1px 8px;text-decoration:line-through}
+.x-muted{color:var(--grey-secondary)}
+.cm-iconbtn.x-pencil,.cm-iconbtn.x-pencil:hover,.cm-iconbtn.x-pencil:active{color:var(--grey-secondary);background:transparent}
+.cm-iconbtn.x-pencil:hover{color:var(--grey-main)}
+.x-toast{position:absolute;left:0;right:0;bottom:32px;display:flex;justify-content:center;pointer-events:none;z-index:40}
+.x-group{display:flex;flex-direction:column;gap:16px}
+.x-group h3{margin:0;font-size:14px;line-height:20px;font-weight:600;color:var(--grey-main)}
+.x-group h3+p{margin:-12px 0 0;font-size:12px;line-height:16px;color:var(--grey-secondary)}
+.x-w200{width:100%;max-width:200px}
+.x-w400{width:400px;max-width:100%}
+.x-root{background:var(--white-main)}
+.ps-head{background:var(--white-main);border-bottom:1px solid var(--grey-tertiary);padding-inline:32px}
+.ps-head>div{max-width:1200px;margin:0 auto;min-height:64px;padding-block:12px;box-sizing:border-box;display:flex;align-items:center;gap:12px}
+.ps-head .ps-for{font-size:14px;line-height:20px;color:var(--grey-secondary)}
+.w-product{position:relative;display:inline-flex;align-items:center}
+.w-pill{font:inherit;font-size:14px;line-height:20px;font-weight:600;color:#212121;background:#ffffff;border:1px solid #d0d0d0;border-radius:9999px;height:32px;padding:0 10px 0 12px;display:inline-flex;align-items:center;gap:6px;cursor:pointer}
+.w-pill:hover,.w-pill[aria-expanded="true"]{border-color:#707070;background:#f5f5f5}
+.w-pill:focus-visible{outline:2px solid transparent;box-shadow:0 0 0 2px #ffffff,0 0 0 4px #004fc5}
+.w-pill .cm-icon{font-size:16px}
+.w-scrim{position:fixed;inset:0;z-index:19}
+.w-menu{position:absolute;top:calc(100% + 6px);right:0;z-index:20;min-width:220px;box-sizing:border-box;padding:4px;background:#ffffff;border:1px solid #d0d0d0;border-radius:8px;box-shadow:var(--shadow-lg);display:flex;flex-direction:column}
+.w-mi{font:inherit;font-size:14px;line-height:20px;color:#212121;background:none;border:0;border-radius:4px;padding:8px 12px;display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left;text-decoration:none;cursor:pointer;width:100%;box-sizing:border-box}
+a.w-mi,a.w-mi:hover{color:#212121}
+.w-mi:hover{background:#f5f5f5}
+.w-mi:focus-visible{outline:2px solid transparent;box-shadow:inset 0 0 0 2px #004fc5}
+.w-mi[aria-checked="true"]{font-weight:600}
+.w-mi .cm-icon{font-size:16px;color:#004fc5}
+.w-mi-sep{height:1px;background:#d0d0d0;margin:4px 0}
+.ps-main{flex-grow:1;padding:32px 32px 120px}
+.ps-wrap{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:24px}
+.ps-grid{display:block}
+.ps-form{max-width:680px;min-width:0}
+.ps-title h1{margin:0;font-size:28px;line-height:34px;font-weight:600;display:flex;align-items:center;gap:10px}
+.ps-title p{margin:6px 0 0;font-size:16px;line-height:22px;color:var(--grey-secondary)}
+.ps-sec{padding:32px 0;border-bottom:1px solid var(--grey-tertiary);display:flex;flex-direction:column;gap:20px}
+.ps-sec:last-child{border-bottom:0}
+.ps-sec h2{margin:0;font-size:18px;line-height:22px;font-weight:600}
+.ps-sec h2+p{margin:4px 0 0;font-size:14px;line-height:20px;color:var(--grey-secondary)}
+.ps-row{display:flex;gap:16px;flex-wrap:wrap}
+.ps-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.ps-chiphead{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:8px}
+.ps-chiphead b{font-size:14px;line-height:20px;font-weight:600}
+.ps-chiphead span{font-size:12px;line-height:16px;color:var(--grey-secondary)}
+.ps-chips{display:flex;flex-wrap:wrap;gap:8px}
+.ps-preview{position:sticky;top:24px;background:var(--bg-page);border-radius:var(--radius-md);padding:20px;display:flex;flex-direction:column;gap:16px}
+.ps-ph{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.ps-ph h2{margin:0;font-size:16px;line-height:22px;font-weight:600;display:flex;align-items:center;gap:8px}
+.ps-ph h2 .cm-icon{color:var(--blue-main)}
+.ps-ph small{font-size:12px;line-height:16px;color:var(--grey-secondary)}
+.ps-seg{display:flex;gap:4px;background:var(--white-main);border:1px solid var(--grey-tertiary);border-radius:var(--radius-sm);padding:3px}
+.ps-seg button{flex:1;font:inherit;font-size:14px;line-height:20px;font-weight:600;color:var(--grey-secondary);background:none;border:0;border-radius:2px;padding:5px 8px;cursor:pointer}
+.ps-seg button:hover{color:var(--grey-main)}
+.ps-seg button[aria-checked="true"]{background:var(--blue-soft);color:var(--blue-main)}
+.ps-seg button:focus-visible{outline:2px solid #004fc5}
+.ps-sample{background:var(--white-main);border:1px solid var(--grey-tertiary);border-radius:var(--radius-md);padding:16px;display:flex;flex-direction:column;gap:12px}
+.ps-sample>span{font-size:12px;line-height:16px;font-weight:600;color:var(--grey-secondary)}
+.ps-sample p{margin:0;font-size:16px;line-height:22px}
+.ps-btnprev{align-self:flex-start;font-size:14px;line-height:20px;font-weight:600;color:#fff;background:var(--blue-main);border-radius:var(--radius-sm);padding:8px 16px}
+.ps-errprev{display:flex;gap:8px;align-items:flex-start;color:var(--red-main)}
+.ps-errprev p{color:var(--red-main)}
+.ps-toastprev{align-self:flex-start;display:flex;gap:8px;align-items:center;background:var(--grey-main);color:#fff;border-radius:var(--radius-md);padding:10px 14px}
+.ps-toastprev p{color:#fff;font-size:14px;line-height:20px}
+.ps-used{font-size:12px;line-height:16px;color:var(--grey-secondary)}
+.ps-bar{position:absolute;left:0;right:0;bottom:0;z-index:15;background:var(--white-main);border-top:1px solid var(--grey-tertiary);box-shadow:0 -4px 16px rgba(0,0,0,.06);padding:14px 32px}
+.ps-bar>div{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:flex-end;gap:8px}
+.ps-bar b{display:flex;align-items:center;gap:8px;font-size:14px;line-height:20px;font-weight:600;margin-right:auto}
+.ps-bar b::before{content:"";width:8px;height:8px;border-radius:9999px;background:var(--blue-main)}
+.ps-clean{font-size:14px;line-height:20px;color:var(--grey-secondary);margin-right:auto}
+.x-toast{bottom:96px}
+.pc-tags{display:flex;flex-wrap:wrap;gap:6px;align-items:center;min-height:44px;box-sizing:border-box;padding:6px 8px;background:var(--white-main);border:1px solid var(--grey-tertiary);border-radius:var(--radius-sm)}
+.pc-tags:focus-within{border:2px solid var(--blue-main);padding:5px 7px}
+.pc-tags input{flex:1 1 100px;min-width:100px;border:0;outline:0;font:inherit;font-size:16px;line-height:22px;padding:4px;color:var(--grey-main);background:transparent}
+.pc-tag{display:inline-flex;align-items:center;gap:2px;padding-right:2px !important}
+.pc-tag button{font:inherit;display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border:0;background:none;border-radius:9999px;color:inherit;cursor:pointer;padding:0}
+.pc-tag button:hover{background:rgba(0,0,0,.08)}
+.pc-tag button:focus-visible{outline:2px solid #004fc5}
+.pc-flabel{font-size:14px;line-height:20px;font-weight:600;margin-bottom:6px;display:block}
+.pc-fhelp{font-size:12px;line-height:16px;color:var(--grey-secondary);margin-top:6px}
+</style>
+</helmet>
+<div class="x-root">
+<header class="ps-head"><div>
+<x-import component-from-global-scope="Copymopy.Logo"></x-import>
+<div style="flex-grow: 1;"></div>
+<span class="ps-for" id="ps-for">Product</span>
+<span class="w-product" onKeyDown="{{onMenuKey}}">
+<button type="button" class="w-pill" aria-haspopup="menu" aria-expanded="{{menuExpanded}}" aria-labelledby="ps-for ps-pname" onClick="{{toggleMenu}}"><span id="ps-pname">{{cur.name}}</span><x-import component-from-global-scope="Copymopy.Icon" name="chevron-down"></x-import></button>
+<sc-if value="{{menuOpen}}" hint-placeholder-val="{{menuOpen}}">
+<div class="w-scrim" onClick="{{closeMenu}}"></div>
+<div class="w-menu" role="menu" aria-label="Products">
+<sc-for list="{{menuProducts}}" as="m" hint-placeholder-count="2">
+<button type="button" class="w-mi" role="menuitemradio" aria-checked="{{m.checked}}" onClick="{{m.pick}}"><span>{{m.name}}</span><sc-if value="{{m.current}}" hint-placeholder-val="{{m.current}}"><x-import component-from-global-scope="Copymopy.Icon" name="check"></x-import></sc-if></button>
+</sc-for>
+<div class="w-mi-sep" role="separator"></div>
+<a class="w-mi" role="menuitem" href="Onboarding.dc.html">Add product</a>
+</div>
+</sc-if>
+</span>
+</div></header>
+<main class="ps-main" onKeyDown="{{onKey}}"><div class="ps-wrap">
+<a href="Main.dc.html" class="x-back"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"></path><path d="M12 19l-7-7 7-7"></path></svg>Back to writing</a>
+<div class="ps-grid">
+<div class="ps-form">
+<div class="ps-title"><h1>{{cur.name}}</h1><p>Copymopy reads this before every rewrite, so you never have to explain {{cur.name}} again.</p></div>
+
+<section class="ps-sec" aria-labelledby="ps-s1" style="border-style: none; padding-bottom: 0px">
+<div><h2 id="ps-s1">About the product</h2><p>The more specific, the better the copy.</p></div>
+<x-import component-from-global-scope="Copymopy.TextField" label="Product name" value="{{draft.name}}" on-change="{{onName}}" error="{{nameError}}"></x-import>
+<x-import component-from-global-scope="Copymopy.TextArea" label="What does it do, and who uses it?" helper="This tells Copymopy the most about your product." value="{{draft.audience}}" on-change="{{onAudience}}" error="{{descError}}" rows="{{rows}}"></x-import>
+
+</section>
+
+<section class="ps-sec" aria-labelledby="ps-s2">
+<div><h2 id="ps-s2">Voice</h2><p>How {{cur.name}} should sound.</p></div>
+<div role="group" aria-labelledby="ps-traits">
+<div class="ps-chiphead"><b id="ps-traits">Brand personality</b><span>{{traitCount}}</span></div>
+<div class="ps-chips">
+<sc-for list="{{traits}}" as="t" hint-placeholder-count="9">
+<x-import component-from-global-scope="Copymopy.Chip" role="checkbox" selected="{{t.selected}}" disabled="{{t.disabled}}" on-click="{{t.toggle}}">{{t.label}}</x-import>
+</sc-for>
+</div>
+</div>
+<x-import component-from-global-scope="Copymopy.TextArea" label="Anything else about your voice? (optional)" placeholder="e.g. We say “you”, not “users”. Never use jokes in errors." value="{{draft.voice}}" on-change="{{onVoice}}" rows="{{rows}}"></x-import>
+</section>
+
+
+</div>
+
+
+</div>
+</div></main>
+<div class="ps-bar" role="region" aria-label="Save"><div>
+<sc-if value="{{dirty}}" hint-placeholder-val="{{dirty}}"><b>Unsaved changes</b></sc-if>
+<sc-if value="{{dirty}}" hint-placeholder-val="{{dirty}}"><x-import component-from-global-scope="Copymopy.Button" variant="ghost" on-click="{{discard}}">Discard</x-import></sc-if>
+<x-import component-from-global-scope="Copymopy.Button" on-click="{{save}}">Save changes</x-import>
+</div></div>
+<sc-if value="{{showToast}}" hint-placeholder-val="{{showToast}}">
+<div class="x-toast"><x-import component-from-global-scope="Copymopy.Toast">{{toastText}}</x-import></div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"startState":{"editor":"enum","options":["saved","dirty"],"default":"saved","section":"Prototype"},"$preview":{"width":1280,"height":820}}'>
+var IND = [
+  { value: 'saas', label: 'SaaS' }, { value: 'fintech', label: 'Fintech' }, { value: 'ecommerce', label: 'E-commerce' },
+  { value: 'health', label: 'Health' }, { value: 'education', label: 'Education' }, { value: 'travel', label: 'Travel' },
+  { value: 'other', label: 'Other' }
+];
+var TYPES = [{ value: 'b2b', label: 'B2B' }, { value: 'b2c', label: 'B2C' }];
+var START = [
+  { id: 'ledgerly', name: 'Ledgerly', industry: 'fintech', otherIndustry: '', type: 'b2b',
+    audience: 'A B2B expense management tool. Our users are finance managers who need to approve employee expenses quickly, often on their phone.',
+    voice: 'Calm and clear, never jokey. We say “you”, not “users”.',
+    use: ['workspace', 'approve', 'expense', 'approver'], avoid: ['users', 'submit', 'oops', 'simply'] },
+  { id: 'pawpal', name: 'Pawpal', industry: 'other', otherIndustry: 'Pet care', type: 'b2c',
+    audience: 'An app for booking dog walkers and sitters. Our users are busy dog owners who often book last minute.',
+    voice: 'Warm and a little playful. Short sentences.', use: [], avoid: [] }
+];
+function indLabel(p) { if (p.industry === 'other') return p.otherIndustry || 'Other'; var f = IND.find(function (o) { return o.value === p.industry; }); return f ? f.label : 'Industry not set'; }
+function typeLabel(p) { return (TYPES.find(function (o) { return o.value === p.type; }) || TYPES[0]).label; }
+function split(v) { return (v || '').split(',').map(function (w) { return w.trim(); }).filter(Boolean); }
+function clone(p) { return Object.assign({}, p, { use: p.use.slice(), avoid: p.avoid.slice() }); }
+function toast(self, text) { self.setState({ toast: text }); clearTimeout(self._t); self._t = setTimeout(function () { self.setState({ toast: '' }); }, 2500); }
+var TRAITS = ['Calm', 'Clear', 'Direct', 'Confident', 'Formal', 'Friendly', 'Warm', 'Empathetic', 'Playful'];
+var FAMILY = { Calm: 'calm', Clear: 'calm', Direct: 'calm', Confident: 'calm', Formal: 'calm', Friendly: 'warm', Warm: 'warm', Empathetic: 'warm', Playful: 'playful' };
+var ELS = [{ value: 'button', label: 'Button' }, { value: 'error', label: 'Error' }, { value: 'toast', label: 'Toast' }];
+var CONTEXT = { ledgerly: 'An expense report is ready for sign-off.', pawpal: 'A walker is free tomorrow at 3 pm.' };
+var SAMPLE = {
+  ledgerly: {
+    calm: { button: 'Approve expense', error: 'This card was declined. Check the details or use another card.', toast: 'Expense approved' },
+    warm: { button: 'Approve it', error: 'That card didn’t go through. Try another one and you’re all set.', toast: 'Done, it’s approved' },
+    playful: { button: 'Ship it', error: 'That card said no. Give another one a go.', toast: 'Approved and on its way' }
+  },
+  pawpal: {
+    calm: { button: 'Book walk', error: 'We couldn’t book this walk. Pick another time.', toast: 'Walk booked' },
+    warm: { button: 'Book this walk', error: 'That time just got taken. Want to try another one?', toast: 'All set, Sam’s on it' },
+    playful: { button: 'Walkies, go', error: 'Someone beat you to that slot. Sniff out another time?', toast: 'Walkies booked' }
+  }
+};
+var START_TRAITS = { ledgerly: ['Calm', 'Clear', 'Direct'], pawpal: ['Warm', 'Playful'] };
+var START_NOTES = { ledgerly: 'Never jokey. We say “you”, not “users”.', pawpal: 'Short sentences.' };
+var PRODUCTS0 = START.map(function (p) { return Object.assign(clone(p), { traits: START_TRAITS[p.id].slice(), voice: START_NOTES[p.id] }); });
+function cl(p) { return Object.assign(clone(p), { traits: p.traits.slice() }); }
+function same(a, b) { return JSON.stringify(a) === JSON.stringify(b); }
+
+class Component extends DCLogic {
+  componentWillUnmount() { clearTimeout(this._t); }
+  renderVals() {
+    var self = this, s = this.state || {};
+    var products = s.products || PRODUCTS0;
+    var curId = s.curId || 'ledgerly';
+    var cur = products.find(function (p) { return p.id === curId; }) || products[0];
+    var drafts = s.drafts;
+    if (!drafts) {
+      drafts = {};
+      if (this.props.startState === 'dirty') {
+        var d0 = cl(cur); d0.traits = ['Calm', 'Clear', 'Friendly']; drafts[cur.id] = d0;
+      }
+    }
+    var draft = drafts[curId] || cl(cur);
+    var inputs = s.inputs || { use: '', avoid: '' };
+    var setDraft = function (o) { var nd = Object.assign({}, drafts); nd[curId] = Object.assign(cl(draft), o); self.setState({ drafts: nd, nameError: '', descError: '' }); };
+    var dirty = !same(Object.assign(cl(draft)), cl(cur));
+    var discard = function () { var nd = Object.assign({}, drafts); delete nd[curId]; self.setState({ drafts: nd, nameError: '', inputs: { use: '', avoid: '' } }); };
+    var addWords = function (kind, text) {
+      var words = split(text).filter(function (w) { return draft[kind].indexOf(w) < 0; });
+      var o = {}; o[kind] = draft[kind].concat(words); setDraft(o);
+      var ni = Object.assign({}, inputs); ni[kind] = ''; self.setState({ inputs: ni });
+    };
+    var tags = function (kind) {
+      return draft[kind].map(function (w) {
+        return { w: w, removeLabel: 'Remove ' + w, remove: function () { var o = {}; o[kind] = draft[kind].filter(function (x) { return x !== w; }); setDraft(o); } };
+      });
+    };
+    var keyFor = function (kind) {
+      return function (e) {
+        var v = e.target.value;
+        if ((e.key === 'Enter' || e.key === ',') && v.trim()) { e.preventDefault(); addWords(kind, v); }
+        else if (e.key === 'Backspace' && !v && draft[kind].length) { var o = {}; o[kind] = draft[kind].slice(0, -1); setDraft(o); }
+      };
+    };
+    var setInput = function (kind) { return function (e) { var ni = Object.assign({}, inputs); ni[kind] = e.target.value.replace(/,$/, ''); self.setState({ inputs: ni }); }; };
+    var full = draft.traits.length >= 3;
+    var fam = draft.traits.length ? FAMILY[draft.traits[0]] : 'calm';
+    if (draft.traits.indexOf('Playful') >= 0 && draft.traits.length <= 2) fam = 'playful';
+    var el = s.el || 'button';
+    var samples = (SAMPLE[cur.id] || SAMPLE.ledgerly)[fam];
+    var used = [];
+    if (draft.traits.length) used.push('Sounds ' + draft.traits.join(', ').toLowerCase());
+    if (draft.use.length) used.push('uses “' + draft.use[0] + '”');
+    if (draft.avoid.length) used.push('avoids “' + draft.avoid[0] + '”');
+    var menuOpen = !!s.menuOpen;
+    return {
+      industries: IND, types: TYPES, rows: 3,
+      draft: draft, isOther: draft.industry === 'other', nameError: s.nameError || '', descError: s.descError || '',
+      onName: function (e) { setDraft({ name: e.target.value }); },
+      onIndustry: function (e) { setDraft({ industry: e.target.value }); },
+      onOther: function (e) { setDraft({ otherIndustry: e.target.value }); },
+      onType: function (e) { setDraft({ type: e.target.value }); },
+      onAudience: function (e) { setDraft({ audience: e.target.value }); },
+      onVoice: function (e) { setDraft({ voice: e.target.value }); },
+      showToast: !!s.toast, toastText: s.toast || '',
+      cur: Object.assign({}, cur, { active: products.indexOf(cur) === 0 }),
+      traits: TRAITS.map(function (t) {
+        var on = draft.traits.indexOf(t) >= 0;
+        return { label: t, selected: on, disabled: !on && full,
+          toggle: function () { setDraft({ traits: on ? draft.traits.filter(function (x) { return x !== t; }) : draft.traits.concat([t]) }); } };
+      }),
+      traitCount: draft.traits.length ? draft.traits.length + ' of 3 picked' : 'Pick up to 3',
+      useTags: tags('use'), avoidTags: tags('avoid'),
+      useInput: inputs.use, avoidInput: inputs.avoid,
+      onUseInput: setInput('use'), onAvoidInput: setInput('avoid'),
+      onUseKey: keyFor('use'), onAvoidKey: keyFor('avoid'),
+      elements: ELS.map(function (e) { return { label: e.label, checked: e.value === el ? 'true' : 'false', pick: function () { self.setState({ el: e.value }); } }; }),
+      isButton: el === 'button', isError: el === 'error', isToast: el === 'toast',
+      sample: samples[el], sampleContext: CONTEXT[cur.id] || '',
+      sampleLabel: el === 'button' ? 'Button' : el === 'error' ? 'Error message' : 'Toast',
+      previewNote: dirty ? 'With your changes' : 'Saved voice',
+      usedLine: used.length ? used.join(' · ') : 'Pick a personality to see the difference',
+      dirty: dirty, clean: !dirty,
+      discard: discard,
+      onKey: function (e) { if (e.key === 'Escape' && menuOpen) self.setState({ menuOpen: false }); },
+      save: function () {
+        var ne = draft.name.trim() ? '' : 'Add a product name.';
+        var de = (draft.audience || '').trim() ? '' : 'Add a sentence about what it does and who uses it.';
+        if (ne || de) { self.setState({ nameError: ne, descError: de }); return; }
+        var nd = Object.assign({}, drafts); delete nd[curId];
+        self.setState({ products: products.map(function (p) { return p.id === curId ? cl(draft) : p; }), drafts: nd });
+        toast(self, draft.name + ' saved');
+      },
+      menuOpen: menuOpen, menuExpanded: menuOpen ? 'true' : 'false',
+      toggleMenu: function () { self.setState({ menuOpen: !(self.state || {}).menuOpen }); },
+      closeMenu: function () { self.setState({ menuOpen: false }); },
+      onMenuKey: function (e) { if (e.key === 'Escape') self.setState({ menuOpen: false }); },
+      menuProducts: products.map(function (p) {
+        var c = p.id === curId;
+        return { name: p.name, current: c, checked: c ? 'true' : 'false', pick: function () { self.setState({ curId: p.id, menuOpen: false, inputs: { use: '', avoid: '' } }); } };
+      })
+    };
+  }
+}
+</script>
+</body>
+</html>

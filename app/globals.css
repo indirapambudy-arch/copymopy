@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+/*
+  Copymopy design tokens, mapped to the Tailwind theme.
+  Source of truth: docs/design-system/tokens.json and tokens.css.
+  Tailwind's own default colors, spacing, radius, shadows and type sizes are
+  switched off ("initial"), so components can only use these tokens.
+*/
+@theme {
+  /* Color: bg-blue-main, text-grey-secondary, border-grey-tertiary … */
+  --color-*: initial;
+  --color-grey-main: #212121;
+  --color-grey-secondary: #707070;
+  --color-grey-tertiary: #d0d0d0;
+  --color-grey-bgdisabled: #f2f2f2;
+  --color-grey-textdisabled: #8d8d8d;
+  --color-blue-main: #004fc5;
+  --color-blue-hover: #003c96;
+  --color-blue-clicked: #002965;
+  --color-blue-disabled: #5690e7;
+  --color-blue-soft: #e8f0fc;
+  --color-red-main: #c50003;
+  --color-green-main: #1e7a3c;
+  --color-white-main: #ffffff;
+  --color-bg-page: #f5f5f5;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  /* Spacing (4px base): p-1 = space-1 (4px) … p-8 = space-8 (32px) */
+  --spacing: initial;
+  --spacing-0: 0px;
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-6: 24px;
+  --spacing-8: 32px;
+  /* Control heights from the component docs: Button lg/md/sm, IconButton md/sm */
+  --spacing-control-lg: 44px;
+  --spacing-control-md: 36px;
+  --spacing-control-sm: 28px;
+  /* Icons follow the text size around them */
+  --spacing-icon: 1em;
+
+  /* Widest content column: max-w-page */
+  --container-page: 960px;
+
+  /* Letter spacing for the logo wordmark */
+  --tracking-logo: -0.03em;
+
+  /* Radius: rounded-sm (buttons, inputs), rounded-md (cards), rounded-full (chips) */
+  --radius-*: initial;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-full: 9999px;
+
+  /* Borders: border-default = `border` (1px), border-focus = `border-2` (2px) */
+
+  /* Shadow: shadow-lg floats; shadow-focus-ring is keyboard focus */
+  --shadow-*: initial;
+  --shadow-lg: 0 4px 12px #2121211f, 0 12px 32px -4px #21212129;
+  --shadow-focus-ring: 0 0 0 2px var(--color-white-main), 0 0 0 4px var(--color-blue-main);
+
+  /* Type: text-heading-32, text-body-16, text-caption-12-bold … (size, line height and weight together) */
+  --text-*: initial;
+  --text-heading-32: 32px;
+  --text-heading-32--line-height: 36px;
+  --text-heading-32--font-weight: 600;
+  --text-heading-28: 28px;
+  --text-heading-28--line-height: 34px;
+  --text-heading-28--font-weight: 600;
+  --text-heading-24: 24px;
+  --text-heading-24--line-height: 28px;
+  --text-heading-24--font-weight: 600;
+  --text-subheading-18-bold: 18px;
+  --text-subheading-18-bold--line-height: 22px;
+  --text-subheading-18-bold--font-weight: 600;
+  --text-subheading-18: 18px;
+  --text-subheading-18--line-height: 22px;
+  --text-subheading-18--font-weight: 400;
+  --text-body-16-bold: 16px;
+  --text-body-16-bold--line-height: 20px;
+  --text-body-16-bold--font-weight: 600;
+  --text-body-16: 16px;
+  --text-body-16--line-height: 22px;
+  --text-body-16--font-weight: 400;
+  --text-caption-14-bold: 14px;
+  --text-caption-14-bold--line-height: 20px;
+  --text-caption-14-bold--font-weight: 600;
+  --text-caption-14: 14px;
+  --text-caption-14--line-height: 20px;
+  --text-caption-14--font-weight: 400;
+  --text-caption-12-bold: 12px;
+  --text-caption-12-bold--line-height: 16px;
+  --text-caption-12-bold--font-weight: 600;
+  --text-caption-12: 12px;
+  --text-caption-12--line-height: 16px;
+  --text-caption-12--font-weight: 400;
+  /* Icon sizes from the component docs (icons are sized by font-size) */
+  --text-icon-md: 20px;
+  --text-icon-sm: 18px;
+
+  /* Loader spin speed from the reference implementation */
+  --animate-spin: spin 0.8s linear infinite;
+}
+
+/* Inter is loaded in app/layout.tsx and exposed as --font-inter */
+@theme inline {
+  --font-sans: var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-bg-page font-sans text-body-16 text-grey-main antialiased;
+  }
+}

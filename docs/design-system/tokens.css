@@ -1,0 +1,33 @@
+/* Copymopy — generated from tokens.json */
+:root, [data-theme="light"] {
+  --grey-main: #212121;
+  --grey-secondary: #707070;
+  --grey-tertiary: #d0d0d0;
+  --grey-bgdisabled: #f2f2f2;
+  --grey-textdisabled: #8d8d8d;
+  --blue-main: #004fc5;
+  --blue-hover: #003c96;
+  --blue-clicked: #002965;
+  --blue-disabled: #5690e7;
+  --blue-soft: #e8f0fc;
+  --red-main: #c50003;
+  --green-main: #1e7a3c;
+  --white-main: #ffffff;
+  --bg-page: #f5f5f5;
+  --shadow-lg: 0 4px 12px #2121211f, 0 12px 32px -4px #21212129;
+  --focus-ring: 0 0 0 2px #ffffff, 0 0 0 4px #004fc5;
+}
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-full: 9999px;
+  --border-default: 1px;
+  --border-focus: 2px;
+  --font-sans: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+}

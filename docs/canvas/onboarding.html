@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Set up your product</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/copymopy/tokens.css">
+<link rel="stylesheet" href="ds/copymopy/components/bundle.css">
+<script src="ds/copymopy/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#004fc5}a:hover{color:#003c96}
+.ob-block{width:100%;box-sizing:border-box;text-decoration:none}
+</style>
+</helmet>
+<div style="min-height: 820px; background: var(--white-main); color: var(--grey-main); font-family: var(--font-sans); display: flex; flex-direction: column;">
+<header style="background: var(--white-main); border-bottom: 1px solid var(--grey-tertiary); padding-inline: 32px; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px; border-style: solid; padding-right: 32px">
+<div style="max-width: 1200px; margin: 0 auto; min-height: 64px; display: flex; align-items: center; gap: 12px; justify-content: flex-start">
+<x-import component-from-global-scope="Copymopy.Logo"></x-import>
+
+</div>
+</header>
+<main style="flex-grow: 1; padding: 48px 16px; display: flex; justify-content: center; align-items: flex-start; height: 645px; padding-top: 24px">
+<section aria-labelledby="ob-title" style="width: 100%; max-width: 520px; display: flex; flex-direction: column; gap: 24px;">
+<div style="display: flex; flex-direction: column; gap: 12px; text-align: center; margin-bottom: 8px;">
+<h1 id="ob-title" style="margin: 0; font-size: 24px; line-height: 1.17; font-weight: 600; letter-spacing: 0px; font-style: normal; font-family: Inter, system-ui, -apple-system, &quot;Segoe UI&quot;, sans-serif">Tell us about your product</h1>
+
+</div>
+<x-import component-from-global-scope="Copymopy.TextField" label="Product name" placeholder="e.g. Ledgerly" value="{{name}}" on-change="{{onName}}" error="{{nameError}}"></x-import>
+
+
+<x-import component-from-global-scope="Copymopy.TextArea" label="What does it do, and who uses it?" placeholder="e.g. A B2B expense management tool. Our users are finance managers who need to approve employee expenses quickly." value="{{audience}}" on-change="{{onAudience}}" error="{{descError}}" rows="{{rows}}"></x-import>
+<div role="group" aria-labelledby="ob-traits">
+<div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px;"><span id="ob-traits" style="font-size: 14px; line-height: 20px;">Brand personality</span><span style="font-size: 12px; line-height: 16px; color: var(--grey-secondary);">{{traitCount}}</span></div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+<sc-for list="{{traits}}" as="t" hint-placeholder-count="9">
+<x-import component-from-global-scope="Copymopy.Chip" role="checkbox" selected="{{t.selected}}" disabled="{{t.disabled}}" on-click="{{t.toggle}}">{{t.label}}</x-import>
+</sc-for>
+</div>
+</div>
+<x-import component-from-global-scope="Copymopy.TextArea" label="Anything else about your voice? (optional)" placeholder="e.g. We say “you”, not “users”. Never use jokes in errors." value="{{voice}}" on-change="{{onVoice}}" rows="{{rows}}"></x-import>
+<div style="display: flex; flex-direction: column; gap: 12px; margin-top: 8px;">
+<sc-if value="{{canContinue}}" hint-placeholder-val="{{canContinue}}">
+<a href="Main.dc.html" class="cm-btn cm-btn-primary cm-btn-lg ob-block">Continue</a>
+</sc-if>
+<sc-if value="{{needsName}}" hint-placeholder-val="{{needsName}}">
+<x-import component-from-global-scope="Copymopy.Button" size="lg" class="ob-block" on-click="{{tryContinue}}">Continue</x-import>
+</sc-if>
+<p style="margin: 0; text-align: center; font-size: 12px; line-height: 16px; color: var(--grey-secondary);">You can change these anytime</p>
+</div>
+</section>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":820}}'>
+var OB_INDUSTRIES = [
+  { value: 'saas', label: 'SaaS' }, { value: 'fintech', label: 'Fintech' }, { value: 'ecommerce', label: 'E-commerce' },
+  { value: 'health', label: 'Health' }, { value: 'education', label: 'Education' }, { value: 'travel', label: 'Travel' },
+  { value: 'other', label: 'Other' }
+];
+var OB_TYPES = [{ value: 'b2b', label: 'B2B' }, { value: 'b2c', label: 'B2C' }];
+var OB_TRAITS = ['Calm', 'Clear', 'Direct', 'Confident', 'Formal', 'Friendly', 'Warm', 'Empathetic', 'Playful'];
+
+class Component extends DCLogic {
+  renderVals() {
+    var self = this;
+    var s = Object.assign({ name: '', industry: '', otherIndustry: '', type: 'b2b', audience: '', voice: '', traits: [], nameError: '', descError: '' }, this.state || {});
+    var full = s.traits.length >= 3;
+    var hasName = s.name.trim().length > 0 && s.audience.trim().length > 0;
+    return {
+      name: s.name, nameError: s.nameError, descError: s.descError, industry: s.industry, otherIndustry: s.otherIndustry, isOther: s.industry === 'other',
+      type: s.type, audience: s.audience, voice: s.voice,
+      industries: OB_INDUSTRIES, types: OB_TYPES, maxLen: 300, rows: 3,
+      canContinue: hasName, needsName: !hasName,
+      onName: function (e) { self.setState({ name: e.target.value, nameError: '' }); },
+      onIndustry: function (e) { self.setState({ industry: e.target.value }); },
+      yes: true,
+      onOther: function (e) { self.setState({ otherIndustry: e.target.value }); },
+      onType: function (e) { self.setState({ type: e.target.value }); },
+      onAudience: function (e) { self.setState({ audience: e.target.value, descError: '' }); },
+      onVoice: function (e) { self.setState({ voice: e.target.value }); },
+      traitCount: s.traits.length ? s.traits.length + ' of 3 picked' : 'Pick up to 3',
+      traits: OB_TRAITS.map(function (t) {
+        var on = s.traits.indexOf(t) >= 0;
+        return { label: t, selected: on, disabled: !on && full,
+          toggle: function () { var cur = (self.state || {}).traits || []; self.setState({ traits: on ? cur.filter(function (x) { return x !== t; }) : cur.concat([t]) }); } };
+      }),
+      tryContinue: function () {
+        var st = Object.assign({ name: '', audience: '' }, self.state || {});
+        self.setState({
+          nameError: st.name.trim() ? '' : 'Add your product’s name so you can find it later.',
+          descError: st.audience.trim() ? '' : 'Add a sentence about what it does and who uses it.'
+        });
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

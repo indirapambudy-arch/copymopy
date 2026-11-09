@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Microcopy lab</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/copymopy/tokens.css">
+<link rel="stylesheet" href="ds/copymopy/components/bundle.css">
+<script src="ds/copymopy/components/bundle.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#004fc5}a:hover{color:#003c96}
+.w-block{width:100%;box-sizing:border-box}
+.w-left{flex:0 1 auto;max-width:100%;box-sizing:border-box;padding:32px 32px 32px max(32px, calc((100% - 1200px) / 2));background:#ffffff}
+.w-right{flex:1 1 420px;min-width:0;box-sizing:border-box;padding:32px max(32px, calc((100% - 1200px) / 2)) 32px 32px;background:#f5f5f5}
+@media (max-width:900px){.w-left{width:100%;padding:16px 16px 32px}.w-right{padding:24px 16px 40px}}
+.w-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.w-product{position:relative;display:inline-flex;align-items:center}
+.w-pill{font:inherit;font-size:14px;line-height:20px;font-weight:600;color:#212121;background:#ffffff;border:1px solid #d0d0d0;border-radius:9999px;height:32px;padding:0 10px 0 12px;display:inline-flex;align-items:center;gap:6px;cursor:pointer}
+.w-pill:hover,.w-pill[aria-expanded="true"]{border-color:#707070;background:#f5f5f5}
+.w-pill:focus-visible{outline:2px solid transparent;box-shadow:0 0 0 2px #ffffff,0 0 0 4px #004fc5}
+.w-pill .cm-icon{font-size:16px}
+.w-scrim{position:fixed;inset:0;z-index:19}
+.w-menu{position:absolute;top:calc(100% + 6px);right:0;z-index:20;min-width:220px;box-sizing:border-box;padding:4px;background:#ffffff;border:1px solid #d0d0d0;border-radius:8px;box-shadow:var(--shadow-lg);display:flex;flex-direction:column}
+.w-mi{font:inherit;font-size:14px;line-height:20px;color:#212121;background:none;border:0;border-radius:4px;padding:8px 12px;display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left;text-decoration:none;cursor:pointer;width:100%;box-sizing:border-box}
+a.w-mi,a.w-mi:hover{color:#212121}
+.w-mi:hover{background:#f5f5f5}
+.w-mi:focus-visible{outline:2px solid transparent;box-shadow:inset 0 0 0 2px #004fc5}
+.w-mi[aria-checked="true"]{font-weight:600}
+.w-mi .cm-icon{font-size:16px;color:#004fc5}
+.w-mi-sep{height:1px;background:#d0d0d0;margin:4px 0}
+.w-try{font:inherit;font-size:14px;line-height:20px;color:#004fc5;background:none;border:0;padding:4px 0;cursor:pointer;text-align:left;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#d0d0d0}
+.w-try:hover{text-decoration-color:#004fc5}
+.w-link{font:inherit;font-size:14px;line-height:20px;font-weight:600;color:#004fc5;background:none;border:0;padding:4px 0;cursor:pointer;display:inline-flex;align-items:center;gap:6px;align-self:flex-start}
+.w-link:hover{color:#003c96}
+.w-voice{margin:0;font-size:14px;line-height:20px;color:var(--grey-secondary)}
+.w-voice b{font-weight:600;color:var(--grey-main)}
+.w-link:focus-visible{outline:2px solid transparent;box-shadow:0 0 0 2px #ffffff,0 0 0 4px #004fc5;border-radius:4px}
+.w-file{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden}
+.w-drop{display:flex;align-items:center;gap:12px;padding:16px;border:1px dashed #d0d0d0;border-radius:8px;background:#f5f5f5;cursor:pointer}
+.w-drop:hover{border-color:#004fc5;background:#e8f0fc}
+.w-drop:focus-within{outline:2px solid transparent;box-shadow:0 0 0 2px #ffffff,0 0 0 4px #004fc5}
+</style>
+</helmet>
+<div style="min-height: 820px; background: var(--white-main); color: var(--grey-main); font-family: var(--font-sans); display: flex; flex-direction: column;">
+<header style="background: var(--white-main); padding-inline: 32px; border-style: solid; border-color: var(--grey-tertiary, #d0d0d0); border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 0px">
+<div style="max-width: 1200px; margin: 0 auto; min-height: 64px; padding-block: 12px; box-sizing: border-box; display: flex; align-items: center; gap: 12px; flex-wrap: wrap">
+<x-import component-from-global-scope="Copymopy.Logo"></x-import>
+<div style="flex-grow: 1;"></div>
+<div style="display: flex; align-items: center; gap: 12px;">
+<span style="font-size: 14px; line-height: 20px; color: var(--grey-secondary);" id="w-product-label">Writing for</span>
+<span class="w-product" onKeyDown="{{onMenuKey}}">
+<button type="button" class="w-pill" aria-haspopup="menu" aria-expanded="{{menuExpanded}}" aria-labelledby="w-product-label w-product-name" onClick="{{toggleMenu}}"><span id="w-product-name">{{product.name}}</span><x-import component-from-global-scope="Copymopy.Icon" name="chevron-down"></x-import></button>
+<sc-if value="{{menuOpen}}" hint-placeholder-val="{{menuOpen}}">
+<div class="w-scrim" onClick="{{closeMenu}}"></div>
+<div class="w-menu" role="menu" aria-label="Products">
+<sc-for list="{{menuProducts}}" as="m" hint-placeholder-count="2">
+<button type="button" class="w-mi" role="menuitemradio" aria-checked="{{m.checked}}" onClick="{{m.pick}}"><span>{{m.name}}</span><sc-if value="{{m.current}}" hint-placeholder-val="{{m.current}}"><x-import component-from-global-scope="Copymopy.Icon" name="check"></x-import></sc-if></button>
+</sc-for>
+<div class="w-mi-sep" role="separator"></div>
+<a class="w-mi" role="menuitem" href="Onboarding.dc.html">Add product</a>
+<a class="w-mi" role="menuitem" href="Products.dc.html">Edit product</a>
+</div>
+</sc-if>
+</span>
+
+</div>
+</div>
+</header>
+<main style="flex-grow: 1; display: flex; flex-wrap: wrap; align-items: stretch;">
+<section aria-labelledby="w-title" class="w-left" style="width: calc(max(32px, (100% - 1200px) / 2) + 432px);">
+<div style="width: 100%; max-width: 528px; display: flex; flex-direction: column; gap: 24px;">
+<h1 id="w-title" style="margin: 0; font-size: 28px; line-height: 34px; font-weight: 600;">Start writing</h1>
+<div style="width: 100%; max-width: 400px;">
+<x-import component-from-global-scope="Copymopy.Dropdown" label="Element" options="{{elements}}" value="{{element}}" on-change="{{onElement}}" disabled="{{isLoading}}"></x-import>
+</div>
+<sc-if value="{{isDescribe}}" hint-placeholder-val="{{isDescribe}}">
+<div style="display: flex; flex-direction: column; gap: 16px;">
+<sc-for list="{{fields}}" as="f" hint-placeholder-count="3">
+<x-import component-from-global-scope="Copymopy.TextArea" label="{{f.label}}" placeholder="{{f.placeholder}}" helper="{{f.helper}}" value="{{f.value}}" on-change="{{f.onChange}}" error="{{f.error}}" rows="{{f.rows}}"></x-import>
+</sc-for>
+</div>
+</sc-if>
+<div style="display: flex; flex-direction: column; gap: 8px;">
+<p class="w-voice">Using {{product.name}}’s voice: <b>{{voiceLine}}</b> · <a href="Products.dc.html">Edit</a></p>
+<x-import component-from-global-scope="Copymopy.Button" size="lg" icon="sparkles" class="w-block" loading="{{isLoading}}" on-click="{{write}}">Write copy</x-import>
+</div>
+</div>
+</section>
+<section aria-label="Your copy" aria-busy="{{busyAttr}}" class="w-right">
+<div style="width: 100%; display: flex; flex-direction: column; gap: 16px">
+<sc-if value="{{isEmpty}}" hint-placeholder-val="{{isEmpty}}">
+<x-import component-from-global-scope="Copymopy.EmptyState" title="Your copy will show up here">Pick an element, describe the situation, then select Write copy. You’ll get three different approaches to choose from.</x-import>
+</sc-if>
+<sc-if value="{{isLoading}}" hint-placeholder-val="{{isLoading}}">
+<div style="display: flex; flex-direction: column; gap: 16px;">
+<h2 style="margin: 0; font-size: 18px; line-height: 22px; font-weight: 600;" role="status">Writing your copy…</h2>
+<sc-for list="{{skeletons}}" as="sk" hint-placeholder-count="3">
+<x-import component-from-global-scope="Copymopy.ResultSkeleton" lines="{{sk.lines}}"></x-import>
+</sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{isResults}}" hint-placeholder-val="{{isResults}}">
+<div style="display: flex; flex-direction: column; gap: 16px;">
+<div style="display: flex; flex-direction: column; gap: 4px;">
+<h2 style="margin: 0; font-size: 18px; line-height: 22px; font-weight: 600;">Three approaches</h2>
+<p style="margin: 0; font-size: 14px; line-height: 20px; color: var(--grey-secondary);">{{usedLine}}</p>
+<sc-if value="{{hasFactLine}}" hint-placeholder-val="{{hasFactLine}}"><p style="margin: 0; font-size: 14px; line-height: 20px; color: var(--grey-secondary); display: flex; gap: 6px; align-items: center;"><x-import component-from-global-scope="Copymopy.Icon" name="check"></x-import>{{factLine}}</p></sc-if>
+
+</div>
+<sc-for list="{{results}}" as="r" hint-placeholder-count="3">
+<x-import component-from-global-scope="Copymopy.ResultCard" label="{{r.label}}" badge="{{r.badge}}" rationale="{{r.rationale}}" text="{{r.text}}" parts="{{r.parts}}" note="{{r.note}}" refining="{{r.refining}}" refine-options="{{refineOptions}}" on-refine="{{r.refine}}" on-undo="{{r.undo}}"></x-import>
+</sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{isError}}" hint-placeholder-val="{{isError}}">
+<div class="cm-empty" role="alert">
+<span class="cm-empty-icon" style="color: var(--red-main); display: inline-flex;"><x-import component-from-global-scope="Copymopy.Icon" name="alert"></x-import></span>
+<h2 class="cm-empty-title">Couldn’t write this</h2>
+<p class="cm-empty-text">Something went wrong on our side. Your text and settings are still here, so you can try again.</p>
+<x-import component-from-global-scope="Copymopy.Button" variant="secondary" icon="refresh" on-click="{{write}}">Try again</x-import>
+</div>
+</sc-if>
+</div>
+</section>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"startState":{"editor":"enum","options":["empty","loading","results","error"],"default":"empty","section":"Prototype"},"simulateError":{"editor":"boolean","default":false,"section":"Prototype"},"$preview":{"width":1280,"height":820}}'>
+/* Each element asks for the context it needs, so nobody has to engineer a prompt. */
+var FACTS = { key: 'facts', label: 'What do we know for sure? (optional)', placeholder: 'e.g. No money was taken. The cart is saved.', helper: 'Copymopy only states facts you add here, so it never promises things your product doesn’t do.' };
+var ELEMENTS = [
+  { value: 'body', label: 'Body text', fields: [
+    { key: 'what', label: 'What should this explain?', placeholder: 'e.g. How expense approvals work for new managers' },
+    { key: 'next', label: 'Key points to include (optional)', placeholder: 'e.g. Approvals go to the right person automatically' }] },
+  { value: 'button', label: 'Button', fields: [
+    { key: 'what', label: 'What does the button do?', placeholder: 'e.g. Saves the invoice as a draft' }] },
+  { value: 'empty', label: 'Empty state', fields: [
+    { key: 'what', label: 'What’s empty, and why?', placeholder: 'e.g. A new account has no invoices yet' },
+    { key: 'next', label: 'What can people do next? (optional)', placeholder: 'e.g. Create their first invoice' }] },
+  { value: 'error', label: 'Error message', fields: [
+    { key: 'what', label: 'What happened?', placeholder: 'e.g. The card payment failed at checkout' },
+    { key: 'next', label: 'What should people do next? (optional)', placeholder: 'e.g. Try again or use another card' }, FACTS] },
+  { value: 'headline', label: 'Headline', fields: [
+    { key: 'what', label: 'What’s the page or moment?', placeholder: 'e.g. Welcome screen for new finance managers' },
+    { key: 'next', label: 'Main benefit (optional)', placeholder: 'e.g. Approvals take minutes, not days' }] },
+  { value: 'helper', label: 'Helper text', fields: [
+    { key: 'what', label: 'Which field is it for?', placeholder: 'e.g. Password' },
+    { key: 'next', label: 'What do people get wrong? (optional)', placeholder: 'e.g. Forgetting to add a number' }] },
+  { value: 'success', label: 'Success message', fields: [
+    { key: 'what', label: 'What just happened?', placeholder: 'e.g. A payment went through' },
+    { key: 'next', label: 'What happens next? (optional)', placeholder: 'e.g. A receipt is emailed' }, FACTS] },
+  { value: 'toast', label: 'Toast', fields: [
+    { key: 'what', label: 'What just happened?', placeholder: 'e.g. An invoice was sent to the client' }] },
+  { value: 'tooltip', label: 'Tooltip', fields: [
+    { key: 'what', label: 'What needs explaining?', placeholder: 'e.g. What an approval limit is' }] }
+];
+var PRODUCTS = [
+  { id: 'ledgerly', name: 'Ledgerly', traits: ['Calm', 'Clear', 'Direct'] },
+  { id: 'pawpal', name: 'Pawpal', traits: ['Warm', 'Playful'] }
+];
+var REFINE = [
+  { value: 'shorter', label: 'Shorter' },
+  { value: 'casual', label: 'More casual' },
+  { value: 'formal', label: 'More formal' },
+  { value: 'retry', label: 'Try again', icon: 'refresh' }
+];
+var REFINE_NOTE = { shorter: 'Shorter', casual: 'More casual', formal: 'More formal', retry: 'New take', custom: 'Your edit' };
+function P(t, b, c) { var a = [{ label: 'Title', text: t }, { label: 'Body', text: b }]; if (c) a.push({ label: 'Button', text: c }); return a; }
+function E(h, b, c) { return [{ label: 'Heading', text: h }, { label: 'Body', text: b }, { label: 'Button', text: c }]; }
+
+/* Three genuinely different approaches per element. The first is the recommended one. */
+var APPROACHES = {
+  error: [
+    { label: 'Direct', why: 'Names the problem and the next step. Works for most checkouts.', parts: P('Payment didn’t go through', 'Your card was declined. Try another card to complete your payment.', 'Try another card') },
+    { label: 'Reassuring', why: 'A softer opening for a stressful moment.', parts: P('Your payment wasn’t completed', 'Check your card details, or try another payment method.', 'Try again'),
+      factParts: P('Your payment wasn’t completed', 'You haven’t been charged. Try another payment method to finish.', 'Try another method'), factWhy: 'Uses your note that no money was taken.' },
+    { label: 'Concise', why: 'Fits a compact space, like a mobile sheet.', parts: P('Payment failed', 'Try a different card.', 'Change card') }
+  ],
+  empty: [
+    { label: 'Action-led', why: 'Points straight to the next step.', parts: E('No invoices yet', 'Create your first invoice to start getting paid.', 'Create invoice') },
+    { label: 'Encouraging', why: 'Explains the value before asking for anything.', parts: E('Your invoices will live here', 'Send one and you can track when it’s paid.', 'Send an invoice') },
+    { label: 'Concise', why: 'For small panels and tables.', parts: E('No invoices', 'Create one to get started.', 'Create invoice') }
+  ],
+  success: [
+    { label: 'Confirming', why: 'Says it worked, without adding detail you didn’t give.', parts: P('Payment received', 'Your payment went through. You’re all set.') },
+    { label: 'Warm', why: 'Friendlier, for a moment worth acknowledging.', parts: P('Thanks, you’re all paid', 'Everything went through as expected.') },
+    { label: 'Concise', why: 'For a small confirmation banner.', parts: P('Paid', 'Payment complete.') }
+  ],
+  button: [
+    { label: 'Specific', why: 'Says exactly what happens.', text: 'Save draft' },
+    { label: 'Friendly', why: 'Feels lighter, but is less precise.', text: 'Save for later' },
+    { label: 'Shortest', why: 'Only works when the screen already makes it clear it’s a draft.', text: 'Save' }
+  ],
+  toast: [
+    { label: 'Confirming', why: 'Short and confirms the action.', text: 'Invoice sent' },
+    { label: 'Specific', why: 'Adds who it went to.', text: 'Invoice sent to your client' },
+    { label: 'Shortest', why: 'Only for very small toasts.', text: 'Sent' }
+  ],
+  tooltip: [
+    { label: 'Plain', why: 'Explains the term in one sentence.', text: 'The most someone can approve without a second sign-off.' },
+    { label: 'With an example', why: 'An example makes the rule concrete.', text: 'For example, with a €500 limit, anything above €500 needs a second approver.' },
+    { label: 'Shortest', why: 'For tight spaces.', text: 'Max amount one person can approve.' }
+  ],
+  headline: [
+    { label: 'Benefit-led', why: 'Leads with what they gain.', text: 'Get expenses approved faster' },
+    { label: 'Problem-led', why: 'Names a pain they already know.', text: 'No more chasing approvals' },
+    { label: 'Punchy', why: 'Memorable, but says less.', text: 'Approvals, sorted' }
+  ],
+  helper: [
+    { label: 'Rule first', why: 'States the rule before they type.', text: 'At least 8 characters, including a number.' },
+    { label: 'Example first', why: 'Shows what a good one looks like.', text: 'For example: blue-river-42' },
+    { label: 'Shortest', why: 'Fits under narrow fields.', text: '8+ characters, 1 number' }
+  ],
+  body: [
+    { label: 'Benefit first', why: 'Opens with what they get.', text: 'Ledgerly sends every expense to the right approver, so nothing sits in an inbox.' },
+    { label: 'How it works', why: 'Explains the mechanism for people who want detail.', text: 'Set your approval rules once. Ledgerly routes each expense and reminds approvers until it’s done.' },
+    { label: 'Short', why: 'For cards and small spaces.', text: 'Approvals go to the right person, automatically.' }
+  ]
+};
+/* Canned refinements so the prototype shows each action changing just one card. */
+var REFINED_ERROR = {
+  shorter: [P('Payment declined', 'Try another card.', 'Try another card'), P('Payment not completed', 'Check your card or try another.', 'Try again'), P('Payment failed', 'Use another card.', 'Change card')],
+  casual: [P('That didn’t go through', 'Your card was declined. Want to try another one?', 'Try another card'), P('No luck with that payment', 'Mind checking your card details, or trying another way to pay?', 'Try again'), P('Card said no', 'Try a different one.', 'Change card')],
+  formal: [P('Payment declined', 'Your card was declined. Please use another card to complete your payment.', 'Use another card'), P('Payment not completed', 'Please review your card details or select another payment method.', 'Retry payment'), P('Payment unsuccessful', 'Please use a different card.', 'Change card')],
+  retry: [P('We couldn’t take this payment', 'Your card was declined. Use another card to finish.', 'Use another card'), P('This payment didn’t finish', 'Double-check your card details, then try again.', 'Try again'), P('Card declined', 'Try another one.', 'Change card')],
+  custom: [P('Payment didn’t go through', 'Your card was declined. Try another card, or contact your bank.', 'Try another card'), P('Your payment wasn’t completed', 'Check your card details, or contact your bank if it keeps happening.', 'Try again'), P('Payment failed', 'Try another card or contact your bank.', 'Change card')]
+};
+var ALT = {
+  empty: [E('Nothing here yet', 'Create an invoice and it will show up here.', 'Create invoice'), E('Ready when you are', 'Send your first invoice and track it from here.', 'Send an invoice'), E('No invoices', 'Add one to start.', 'Add invoice')],
+  success: [P('Payment complete', 'It went through. Nothing else to do.'), P('All done, thank you', 'Your payment went through.'), P('Done', 'Payment received.')],
+  button: ['Save as draft', 'Keep for later', 'Save'],
+  toast: ['Invoice on its way', 'Your client has the invoice', 'Done'],
+  tooltip: ['The highest amount one person can approve alone.', 'Say your limit is €500: a €600 expense needs a second approver.', 'Single-approver maximum.'],
+  headline: ['Approve expenses in minutes', 'Stop chasing sign-offs', 'Approvals, done'],
+  helper: ['Use 8 or more characters, with at least one number.', 'Try something like: river-42-blue', 'Min. 8 characters and a number'],
+  body: ['Every expense goes straight to the right approver, so nothing gets stuck.', 'Set the rules once. Ledgerly handles the routing and the reminders.', 'The right approver, every time.']
+};
+function shortenParts(parts) { return parts.map(function (p) { return p.label === 'Body' ? { label: p.label, text: p.text.split('. ')[0].replace(/\.?$/, '.') } : p; }); }
+
+function elementOf(v) { return ELEMENTS.find(function (o) { return o.value === v; }) || ELEMENTS[3]; }
+function mentionsCharge(t) { return /charg|money|taken|refund|no payment/i.test(t || ''); }
+function samplesFor(snap) {
+  return APPROACHES[snap.element].map(function (a, i) {
+    var useFact = a.factParts && mentionsCharge(snap.facts);
+    return { approach: a.label, why: useFact ? a.factWhy : a.why, parts: a.parts ? (useFact ? a.factParts : a.parts) : null, text: a.text || '', prev: null, prevParts: null, note: '', refining: false };
+  });
+}
+function refined(element, action, i, card) {
+  if (card.parts) {
+    if (element === 'error') return { parts: REFINED_ERROR[action][i] };
+    if (action === 'shorter') return { parts: shortenParts(card.parts) };
+    return { parts: ALT[element][i] };
+  }
+  if (action === 'shorter') return { text: APPROACHES[element][2].text === card.text ? card.text.split(' ').slice(0, 3).join(' ') : APPROACHES[element][2].text };
+  return { text: ALT[element][i] };
+}
+
+class Component extends DCLogic {
+  componentWillUnmount() { clearTimeout(this._t); (this._rt || []).forEach(clearTimeout); }
+
+  renderVals() {
+    var self = this;
+    var start = this.props.startState || 'empty';
+    var s = this.state || {};
+    var screen = s.screen || start;
+    var element = s.element || 'error';
+    var el = elementOf(element);
+    var inputs = s.inputs || (start === 'empty' ? {} : { what: 'The card payment failed at checkout', next: 'Try again or use another card' });
+    var paste = !!s.paste;
+    var pasted = s.pasted || '';
+    var shown = s.shown || { element: element, facts: inputs.facts || '' };
+    var cards = s.cards || samplesFor(shown);
+    var productId = s.productId || 'ledgerly';
+    var product = PRODUCTS.find(function (p) { return p.id === productId; }) || PRODUCTS[0];
+
+    var write = function () {
+      var st = self.state || {};
+      var inp = st.inputs || inputs;
+      var main = st.paste ? (st.pasted || '') : (inp.what || '');
+      if (main.trim().length < 3) {
+        self.setState({ fieldError: st.paste ? 'Paste the copy you want to improve.' : 'Add a few words so there’s something to work with.' });
+        return;
+      }
+      var snap = { element: st.element || 'error', facts: inp.facts || '', shot: !!st.shot, paste: !!st.paste };
+      self.setState({ screen: 'loading', fieldError: '', inputs: inp });
+      clearTimeout(self._t);
+      self._t = setTimeout(function () {
+        self.setState({ screen: self.props.simulateError ? 'error' : 'results', shown: snap, cards: samplesFor(snap) });
+      }, 1400);
+    };
+
+    var setCard = function (i, patch) {
+      var list = ((self.state || {}).cards || cards).slice();
+      list[i] = Object.assign({}, list[i], patch);
+      self.setState({ cards: list });
+    };
+    var refineCard = function (i, action, customText) {
+      var current = ((self.state || {}).cards || cards)[i];
+      setCard(i, { refining: true });
+      self._rt = self._rt || [];
+      self._rt.push(setTimeout(function () {
+        var note = action === 'custom' && customText ? 'Your edit: “' + (customText.length > 32 ? customText.slice(0, 32) + '…' : customText) + '”' : REFINE_NOTE[action];
+        var r = refined(shown.element, action, i, current);
+        var patch = { refining: false, note: note };
+        if (r.parts) { patch.parts = r.parts; patch.prevParts = current.prevParts || current.parts; }
+        else { patch.text = r.text; patch.prev = current.prev || current.text; }
+        setCard(i, patch);
+      }, 900));
+    };
+
+    var usedBits = [product.name + '’s voice'];
+    if (shown.shot) usedBits.push('fitted to your screenshot');
+    if (shown.paste) usedBits.push('based on your pasted copy');
+    var factual = shown.element === 'error' || shown.element === 'success';
+    var factLine = !factual ? '' : (shown.facts ? 'Only states the facts you added.' : 'Doesn’t promise anything you didn’t mention, like refunds or saved carts.');
+
+    return {
+      usedLine: usedBits.join(' · '),
+      factLine: factLine, hasFactLine: !!factLine,
+      voiceLine: product.traits.join(', '),
+      maxSize: 5 * 1024 * 1024,
+      onShot: function (file, url) { self.setState({ shot: url || 'file', shotName: file.name }); },
+      removeShot: function () { self.setState({ shot: '', shotName: '' }); },
+      products: PRODUCTS, productId: productId, product: product,
+      menuOpen: !!s.menuOpen, menuExpanded: s.menuOpen ? 'true' : 'false',
+      toggleMenu: function () { self.setState({ menuOpen: !(self.state || {}).menuOpen }); },
+      closeMenu: function () { self.setState({ menuOpen: false }); },
+      onMenuKey: function (e) { if (e.key === 'Escape') self.setState({ menuOpen: false }); },
+      menuProducts: PRODUCTS.map(function (p) {
+        var cur = p.id === productId;
+        return { name: p.name, current: cur, checked: cur ? 'true' : 'false', pick: function () { self.setState({ productId: p.id, menuOpen: false }); } };
+      }),
+      isDescribe: !paste, isPaste: paste,
+      fields: el.fields.map(function (f, i) {
+        return { label: f.label, placeholder: f.placeholder, helper: f.helper, rows: i === 0 ? 3 : 2, value: inputs[f.key] || '',
+          error: i === 0 ? (s.fieldError || '') : '',
+          onChange: function (e) { var ni = Object.assign({}, (self.state || {}).inputs || inputs); ni[f.key] = e.target.value; self.setState({ inputs: ni, fieldError: '' }); } };
+      }),
+      pasted: pasted, pasteError: paste ? (s.fieldError || '') : '', pasteRows: 5,
+      onPasted: function (e) { self.setState({ pasted: e.target.value, fieldError: '' }); },
+      togglePaste: function () { self.setState({ paste: !paste, fieldError: '' }); },
+      elements: ELEMENTS.map(function (o) { return { value: o.value, label: o.label }; }),
+      element: element,
+      onElement: function (e) { self.setState({ element: elementOf(e.target.value).value, fieldError: '' }); },
+      isEmpty: screen === 'empty',
+      isLoading: screen === 'loading',
+      isResults: screen === 'results',
+      isError: screen === 'error',
+      busyAttr: screen === 'loading' ? 'true' : 'false',
+      skeletons: [{ lines: 2 }, { lines: 2 }, { lines: 2 }],
+      refineOptions: REFINE,
+      results: cards.map(function (c, i) {
+        return {
+          label: c.approach, badge: i === 0 ? 'Recommended' : undefined, rationale: c.why,
+          text: c.text, parts: c.parts || undefined, note: c.note || undefined, refining: !!c.refining,
+          refine: function (action, customText) { refineCard(i, action, customText); },
+          undo: c.prevParts ? function () { setCard(i, { parts: c.prevParts, prevParts: null, note: '' }); }
+            : c.prev ? function () { setCard(i, { text: c.prev, prev: null, note: '' }); } : undefined
+        };
+      }),
+      write: write
+    };
+  }
+}
+</script>
+</body>
+</html>
