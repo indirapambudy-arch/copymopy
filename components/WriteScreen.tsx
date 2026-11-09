@@ -8,7 +8,7 @@ import { AppHeader } from "./AppHeader";
 import { Button } from "./Button";
 import { Dropdown } from "./Dropdown";
 import { EmptyState } from "./EmptyState";
-import { ResultCard } from "./ResultCard";
+import { ResultOptions } from "./ResultOptions";
 import { ResultSkeleton } from "./ResultSkeleton";
 import { TextArea } from "./TextArea";
 
@@ -20,7 +20,8 @@ const DEMO_DELAY_MS = 1500;
 type Screen =
   | { kind: "empty" }
   | { kind: "loading" }
-  | { kind: "results"; result: SavedResult }
+  /** `run` counts each Write copy, so refined cards start fresh every time. */
+  | { kind: "results"; result: SavedResult; run: number }
   | { kind: "error" }
   /** No saved results for this product and element (a fallback for products added in slice 6). */
   | { kind: "not-saved"; elementLabel: string };
@@ -38,6 +39,7 @@ export function WriteScreen() {
   const [screen, setScreen] = useState<Screen>({ kind: "empty" });
   const firstFieldRef = useRef<HTMLTextAreaElement>(null);
   const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
+  const runCount = useRef(0);
 
   useEffect(() => () => clearTimeout(timer.current), []);
 
@@ -62,7 +64,7 @@ export function WriteScreen() {
     setScreen({ kind: "loading" });
     clearTimeout(timer.current);
     timer.current = setTimeout(() => {
-      setScreen(demoShouldFail() ? { kind: "error" } : { kind: "results", result });
+      setScreen(demoShouldFail() ? { kind: "error" } : { kind: "results", result, run: ++runCount.current });
     }, DEMO_DELAY_MS);
   }
 
@@ -160,15 +162,7 @@ export function WriteScreen() {
               <>
                 <h2 className="text-subheading-18-bold">Three ways to say it</h2>
 
-                {screen.result.reply.options.map((o) => (
-                  <ResultCard
-                    key={o.approach}
-                    label={o.approach}
-                    badge={o.recommended ? "Recommended" : undefined}
-                    rationale={o.why}
-                    parts={o.parts}
-                  />
-                ))}
+                <ResultOptions key={screen.run} result={screen.result} />
 
                 {screen.result.reply.left_out.length > 0 && (
                   <section aria-labelledby="left-out-title" className="flex flex-col gap-2 pt-2">

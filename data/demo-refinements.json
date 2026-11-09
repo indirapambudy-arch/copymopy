@@ -1,0 +1,1382 @@
+{
+  "about": "Saved refine variants for the demo, one per refine action (shorter, casual, formal, again) for every option in demo-results.json. Written by Claude Code following prompts/write.md (v-3500), from the original option and only the facts in that run's inputs. Kept apart from demo-results.json so `npm run demo-data` never overwrites them. Keyed by product/element, then approach, then action; each variant has the same parts and labels as the original, and an optional `note` that replaces the action name shown on the card.",
+  "refinements": {
+    "ledgerly/body": {
+      "Direct": {
+        "shorter": {
+          "parts": [
+            {
+              "label": "Body",
+              "text": "Each submitted expense goes straight to the right approver. You review it and decide."
+            }
+          ]
+        },
+        "casual": {
+          "parts": [
+            {
+              "label": "Body",
+              "text": "When someone on your team submits an expense, it reaches the right approver straight away. You take a look and decide."
+            }
+          ]
+        },
+        "formal": {
+          "parts": [
+            {
+              "label": "Body",
+              "text": "When an employee submits an expense, it is sent to the appropriate approver immediately. You then review it and make a decision."
+            }
+          ]
+        },
+        "again": {
+          "parts": [
+            {
+              "label": "Body",
+              "text": "Submitted expenses go to the right approver as soon as they come in. You review each one and decide."
+            }
+          ]
+        }
+      },
+      "Reassuring": {
+        "shorter": {
+          "parts": [
+            {
+              "label": "Body",
+              "text": "No chasing needed. Each expense reaches the right person once it's submitted."
+            }
+          ]
+        },
+        "casual": {
+          "parts": [
+            {
+              "label": "Body",
+              "text": "No need to chase anyone. Every expense heads to the right person the moment it's submitted."
+            }
+          ]
+        },
+        "formal": {
+          "parts": [
+            {
+              "label": "Body",
+              "text": "There is no need to follow up. Each expense is sent to the appropriate person as soon as it is submitted."
+            }
+          ]
+        },
+        "again": {
+          "parts": [
+            {
+              "label": "Body",
+              "text": "You won't have to track down approvers. Each expense goes to the right person as soon as it's submitted."
+            }
+          ]
+        }
+      },
+      "Concise": {
+        "shorter": {
+          "parts": [
+            {
+              "label": "Body",
+              "text": "Approvals go straight to the right person."
+            }
+          ]
+        },
+        "casual": {
+          "parts": [
+            {
+              "label": "Body",
+              "text": "Approvals reach the right person straight away."
+            }
+          ]
+        },
+        "formal": {
+          "parts": [
+            {
+              "label": "Body",
+              "text": "Approvals are sent to the appropriate person immediately."
+            }
+          ]
+        },
+        "again": {
+          "parts": [
+            {
+              "label": "Body",
+              "text": "Every approval goes to the right person at once."
+            }
+          ]
+        }
+      }
+    },
+    "ledgerly/button": {
+      "Direct": {
+        "shorter": {
+          "parts": [
+            {
+              "label": "Label",
+              "text": "Approve"
+            }
+          ]
+        },
+        "casual": {
+          "parts": [
+            {
+              "label": "Label",
+              "text": "Approve this one"
+            }
+          ]
+        },
+        "formal": {
+          "parts": [
+            {
+              "label": "Label",
+              "text": "Approve this expense"
+            }
+          ]
+        },
+        "again": {
+          "parts": [
+            {
+              "label": "Label",
+              "text": "Approve request"
+            }
+          ]
+        }
+      },
+      "Concise": {
+        "shorter": {
+          "parts": [
+            {
+              "label": "Label",
+              "text": "Approve"
+            }
+          ],
+          "note": "Already as short as it gets"
+        },
+        "casual": {
+          "parts": [
+            {
+              "label": "Label",
+              "text": "Approve it"
+            }
+          ]
+        },
+        "formal": {
+          "parts": [
+            {
+              "label": "Label",
+              "text": "Grant approval"
+            }
+          ]
+        },
+        "again": {
+          "parts": [
+            {
+              "label": "Label",
+              "text": "Approve now"
+            }
+          ]
+        }
+      },
+      "Confirming": {
+        "shorter": {
+          "parts": [
+            {
+              "label": "Label",
+              "text": "Confirm"
+            }
+          ]
+        },
+        "casual": {
+          "parts": [
+            {
+              "label": "Label",
+              "text": "Confirm it"
+            }
+          ]
+        },
+        "formal": {
+          "parts": [
+            {
+              "label": "Label",
+              "text": "Confirm expense approval"
+            }
+          ]
+        },
+        "again": {
+          "parts": [
+            {
+              "label": "Label",
+              "text": "Confirm and approve"
+            }
+          ]
+        }
+      }
+    },
+    "ledgerly/empty": {
+      "Direct": {
+        "shorter": {
+          "parts": [
+            {
+              "label": "Heading",
+              "text": "No invoices yet"
+            },
+            {
+              "label": "Body",
+              "text": "Create one to get started."
+            },
+            {
+              "label": "Button",
+              "text": "Create invoice"
+            }
+          ]
+        },
+        "casual": {
+          "parts": [
+            {
+              "label": "Heading",
+              "text": "No invoices here yet"
+            },
+            {
+              "label": "Body",
+              "text": "Create your first one whenever you're ready."
+            },
+            {
+              "label": "Button",
+              "text": "Create invoice"
+            }
+          ]
+        },
+        "formal": {
+          "parts": [
+            {
+              "label": "Heading",
+              "text": "No invoices to display"
+            },
+            {
+              "label": "Body",
+              "text": "To begin, create your first invoice."
+            },
+            {
+              "label": "Button",
+              "text": "Create invoice"
+            }
+          ]
+        },
+        "again": {
+          "parts": [
+            {
+              "label": "Heading",
+              "text": "You have no invoices yet"
+            },
+            {
+              "label": "Body",
+              "text": "Start by creating your first invoice."
+            },
+            {
+              "label": "Button",
+              "text": "Create invoice"
+            }
+          ]
+        }
+      },
+      "Reassuring": {
+        "shorter": {
+          "parts": [
+            {
+              "label": "Heading",
+              "text": "Nothing here yet"
+            },
+            {
+              "label": "Body",
+              "text": "That's normal for a new account."
+            },
+            {
+              "label": "Button",
+              "text": "Create invoice"
+            }
+          ]
+        },
+        "casual": {
+          "parts": [
+            {
+              "label": "Heading",
+              "text": "Nothing here yet"
+            },
+            {
+              "label": "Body",
+              "text": "That's normal for a new account, so make your first invoice whenever you like."
+            },
+            {
+              "label": "Button",
+              "text": "Create invoice"
+            }
+          ]
+        },
+        "formal": {
+          "parts": [
+            {
+              "label": "Heading",
+              "text": "No invoices yet"
+            },
+            {
+              "label": "Body",
+              "text": "This is expected for a new account, and you may create your first invoice at any time."
+            },
+            {
+              "label": "Button",
+              "text": "Create invoice"
+            }
+          ]
+        },
+        "again": {
+          "parts": [
+            {
+              "label": "Heading",
+              "text": "A fresh start"
+            },
+            {
+              "label": "Body",
+              "text": "New accounts start without invoices, so create your first one when you're ready."
+            },
+            {
+              "label": "Button",
+              "text": "Create invoice"
+            }
+          ]
+        }
+      },
+      "Concise": {
+        "shorter": {
+          "parts": [
+            {
+              "label": "Heading",
+              "text": "Start with an invoice"
+            },
+            {
+              "label": "Body",
+              "text": "Your invoices will appear here."
+            },
+            {
+              "label": "Button",
+              "text": "Create invoice"
+            }
+          ]
+        },
+        "casual": {
+          "parts": [
+            {
+              "label": "Heading",
+              "text": "Start with an invoice"
+            },
+            {
+              "label": "Body",
+              "text": "Make one and you'll see it here."
+            },
+            {
+              "label": "Button",
+              "text": "Create invoice"
+            }
+          ]
+        },
+        "formal": {
+          "parts": [
+            {
+              "label": "Heading",
+              "text": "Begin with an invoice"
+            },
+            {
+              "label": "Body",
+              "text": "Invoices you create will be displayed here."
+            },
+            {
+              "label": "Button",
+              "text": "Create invoice"
+            }
+          ]
+        },
+        "again": {
+          "parts": [
+            {
+              "label": "Heading",
+              "text": "Add your first invoice"
+            },
+            {
+              "label": "Body",
+              "text": "Invoices you create show up here."
+            },
+            {
+              "label": "Button",
+              "text": "Create invoice"
+            }
+          ]
+        }
+      }
+    },
+    "ledgerly/error": {
+      "Direct": {
+        "shorter": {
+          "parts": [
+            {
+              "label": "Title",
+              "text": "Payment failed"
+            },
+            {
+              "label": "Body",
+              "text": "Try again or use another card."
+            },
+            {
+              "label": "Button",
+              "text": "Try again"
+            }
+          ]
+        },
+        "casual": {
+          "parts": [
+            {
+              "label": "Title",
+              "text": "Your payment didn't go through"
+            },
+            {
+              "label": "Body",
+              "text": "The card didn't work at checkout. Give it another try or use a different card."
+            },
+            {
+              "label": "Button",
+              "text": "Try again"
+            }
+          ]
+        },
+        "formal": {
+          "parts": [
+            {
+              "label": "Title",
+              "text": "Payment unsuccessful"
+            },
+            {
+              "label": "Body",
+              "text": "Your card payment could not be completed at checkout. Please try again or use another card."
+            },
+            {
+              "label": "Button",
+              "text": "Try again"
+            }
+          ]
+        },
+        "again": {
+          "parts": [
+            {
+              "label": "Title",
+              "text": "Payment didn't work"
+            },
+            {
+              "label": "Body",
+              "text": "The payment for your subscription failed at checkout. Try again or use another card."
+            },
+            {
+              "label": "Button",
+              "text": "Try again"
+            }
+          ]
+        }
+      },
+      "Reassuring": {
+        "shorter": {
+          "parts": [
+            {
+              "label": "Title",
+              "text": "Payment wasn't completed"
+            },
+            {
+              "label": "Body",
+              "text": "You can try again or choose a different card."
+            },
+            {
+              "label": "Button",
+              "text": "Try again"
+            }
+          ]
+        },
+        "casual": {
+          "parts": [
+            {
+              "label": "Title",
+              "text": "Payment didn't finish"
+            },
+            {
+              "label": "Body",
+              "text": "No worries, the card payment just didn't go through. You can try again or pick another card."
+            },
+            {
+              "label": "Button",
+              "text": "Try again"
+            }
+          ]
+        },
+        "formal": {
+          "parts": [
+            {
+              "label": "Title",
+              "text": "Payment not completed"
+            },
+            {
+              "label": "Body",
+              "text": "The card payment was not completed at checkout. You may try again or select a different card."
+            },
+            {
+              "label": "Button",
+              "text": "Try again"
+            }
+          ]
+        },
+        "again": {
+          "parts": [
+            {
+              "label": "Title",
+              "text": "Your payment isn't complete"
+            },
+            {
+              "label": "Body",
+              "text": "Your card payment didn't go through this time. Try again, or choose another card."
+            },
+            {
+              "label": "Button",
+              "text": "Try again"
+            }
+          ]
+        }
+      },
+      "Concise": {
+        "shorter": {
+          "parts": [
+            {
+              "label": "Title",
+              "text": "Payment failed"
+            },
+            {
+              "label": "Body",
+              "text": "Retry or use another card."
+            },
+            {
+              "label": "Button",
+              "text": "Change card"
+            }
+          ]
+        },
+        "casual": {
+          "parts": [
+            {
+              "label": "Title",
+              "text": "Card didn't go through"
+            },
+            {
+              "label": "Body",
+              "text": "Try again, or switch to another card."
+            },
+            {
+              "label": "Button",
+              "text": "Switch cards"
+            }
+          ]
+        },
+        "formal": {
+          "parts": [
+            {
+              "label": "Title",
+              "text": "Card payment unsuccessful"
+            },
+            {
+              "label": "Body",
+              "text": "Please try again or use a different card."
+            },
+            {
+              "label": "Button",
+              "text": "Use a different card"
+            }
+          ]
+        },
+        "again": {
+          "parts": [
+            {
+              "label": "Title",
+              "text": "Payment failed"
+            },
+            {
+              "label": "Body",
+              "text": "Try the card again, or pick another one."
+            },
+            {
+              "label": "Button",
+              "text": "Use another card"
+            }
+          ]
+        }
+      }
+    },
+    "ledgerly/headline": {
+      "Direct": {
+        "shorter": {
+          "parts": [
+            {
+              "label": "Headline",
+              "text": "Add a company"
+            }
+          ]
+        },
+        "casual": {
+          "parts": [
+            {
+              "label": "Headline",
+              "text": "Go ahead and add your company"
+            }
+          ]
+        },
+        "formal": {
+          "parts": [
+            {
+              "label": "Headline",
+              "text": "Register your company"
+            }
+          ]
+        },
+        "again": {
+          "parts": [
+            {
+              "label": "Headline",
+              "text": "Start by adding your company"
+            }
+          ]
+        }
+      },
+      "Benefit-led": {
+        "shorter": {
+          "parts": [
+            {
+              "label": "Headline",
+              "text": "Add your company, free"
+            }
+          ]
+        },
+        "casual": {
+          "parts": [
+            {
+              "label": "Headline",
+              "text": "Adding your company is quick and free"
+            }
+          ]
+        },
+        "formal": {
+          "parts": [
+            {
+              "label": "Headline",
+              "text": "Add your company quickly, at no cost"
+            }
+          ]
+        },
+        "again": {
+          "parts": [
+            {
+              "label": "Headline",
+              "text": "Add your company free. It takes seconds."
+            }
+          ]
+        }
+      },
+      "Friendly invite": {
+        "shorter": {
+          "parts": [
+            {
+              "label": "Headline",
+              "text": "Add your company"
+            }
+          ]
+        },
+        "casual": {
+          "parts": [
+            {
+              "label": "Headline",
+              "text": "Let's get your company added"
+            }
+          ]
+        },
+        "formal": {
+          "parts": [
+            {
+              "label": "Headline",
+              "text": "Welcome. Please add your company."
+            }
+          ]
+        },
+        "again": {
+          "parts": [
+            {
+              "label": "Headline",
+              "text": "Ready to add your company?"
+            }
+          ]
+        }
+      }
+    },
+    "ledgerly/helper": {
+      "Direct": {
+        "shorter": {
+          "parts": [
+            {
+              "label": "Text",
+              "text": "Start with the country code, like DE."
+            }
+          ]
+        },
+        "casual": {
+          "parts": [
+            {
+              "label": "Text",
+              "text": "Just start with the two-letter country code, like DE or GB."
+            }
+          ]
+        },
+        "formal": {
+          "parts": [
+            {
+              "label": "Text",
+              "text": "The IBAN must begin with the two-letter country code, for example DE or GB."
+            }
+          ]
+        },
+        "again": {
+          "parts": [
+            {
+              "label": "Text",
+              "text": "Your IBAN starts with a two-letter country code, such as DE or GB."
+            }
+          ]
+        }
+      },
+      "Example-led": {
+        "shorter": {
+          "parts": [
+            {
+              "label": "Text",
+              "text": "For example, GB29NWBK60161331926819."
+            }
+          ]
+        },
+        "casual": {
+          "parts": [
+            {
+              "label": "Text",
+              "text": "Put the country code first, like GB29NWBK60161331926819."
+            }
+          ]
+        },
+        "formal": {
+          "parts": [
+            {
+              "label": "Text",
+              "text": "Please include the country code at the beginning, for example GB29NWBK60161331926819."
+            }
+          ]
+        },
+        "again": {
+          "parts": [
+            {
+              "label": "Text",
+              "text": "Start with the country code, as in GB29NWBK60161331926819."
+            }
+          ]
+        }
+      },
+      "Reassuring": {
+        "shorter": {
+          "parts": [
+            {
+              "label": "Text",
+              "text": "Start with the country code. Spaces are fine."
+            }
+          ]
+        },
+        "casual": {
+          "parts": [
+            {
+              "label": "Text",
+              "text": "Type the whole IBAN, country code first. Spaces are OK."
+            }
+          ]
+        },
+        "formal": {
+          "parts": [
+            {
+              "label": "Text",
+              "text": "Enter the complete IBAN, beginning with the country code. Spaces are accepted."
+            }
+          ]
+        },
+        "again": {
+          "parts": [
+            {
+              "label": "Text",
+              "text": "Add the full IBAN with the country code first. Spaces won't cause a problem."
+            }
+          ]
+        }
+      }
+    },
+    "ledgerly/success": {
+      "Direct": {
+        "shorter": {
+          "parts": [
+            {
+              "label": "Title",
+              "text": "Expense approved"
+            },
+            {
+              "label": "Body",
+              "text": "We're emailing the employee who asked."
+            }
+          ]
+        },
+        "casual": {
+          "parts": [
+            {
+              "label": "Title",
+              "text": "Expense approved"
+            },
+            {
+              "label": "Body",
+              "text": "We're letting the employee know by email."
+            }
+          ]
+        },
+        "formal": {
+          "parts": [
+            {
+              "label": "Title",
+              "text": "Expense approved"
+            },
+            {
+              "label": "Body",
+              "text": "An email is being sent to the employee who requested the approval."
+            }
+          ]
+        },
+        "again": {
+          "parts": [
+            {
+              "label": "Title",
+              "text": "Expense approved"
+            },
+            {
+              "label": "Body",
+              "text": "The employee who asked for approval will get an email."
+            }
+          ]
+        }
+      },
+      "Reassuring": {
+        "shorter": {
+          "parts": [
+            {
+              "label": "Title",
+              "text": "You approved it"
+            },
+            {
+              "label": "Body",
+              "text": "The employee will get an email, so you don't need to tell them."
+            }
+          ]
+        },
+        "casual": {
+          "parts": [
+            {
+              "label": "Title",
+              "text": "All set"
+            },
+            {
+              "label": "Body",
+              "text": "The employee gets an email, so there's no need to let them know yourself."
+            }
+          ]
+        },
+        "formal": {
+          "parts": [
+            {
+              "label": "Title",
+              "text": "Approval complete"
+            },
+            {
+              "label": "Body",
+              "text": "The employee who requested approval will receive an email, so you do not need to notify them."
+            }
+          ]
+        },
+        "again": {
+          "parts": [
+            {
+              "label": "Title",
+              "text": "That's approved"
+            },
+            {
+              "label": "Body",
+              "text": "We'll email the employee who asked, so you don't have to."
+            }
+          ]
+        }
+      },
+      "Concise": {
+        "shorter": {
+          "parts": [
+            {
+              "label": "Title",
+              "text": "Approved"
+            },
+            {
+              "label": "Body",
+              "text": "We'll email the employee."
+            }
+          ]
+        },
+        "casual": {
+          "parts": [
+            {
+              "label": "Title",
+              "text": "Approved"
+            },
+            {
+              "label": "Body",
+              "text": "We'll let the employee know by email."
+            }
+          ]
+        },
+        "formal": {
+          "parts": [
+            {
+              "label": "Title",
+              "text": "Expense approved"
+            },
+            {
+              "label": "Body",
+              "text": "The employee will be notified by email."
+            }
+          ]
+        },
+        "again": {
+          "parts": [
+            {
+              "label": "Title",
+              "text": "All done"
+            },
+            {
+              "label": "Body",
+              "text": "We're emailing the employee."
+            }
+          ]
+        }
+      }
+    },
+    "ledgerly/toast": {
+      "Direct": {
+        "shorter": {
+          "parts": [
+            {
+              "label": "Message",
+              "text": "Approved"
+            }
+          ]
+        },
+        "casual": {
+          "parts": [
+            {
+              "label": "Message",
+              "text": "Expense approved, all set"
+            }
+          ]
+        },
+        "formal": {
+          "parts": [
+            {
+              "label": "Message",
+              "text": "The expense has been approved"
+            }
+          ]
+        },
+        "again": {
+          "parts": [
+            {
+              "label": "Message",
+              "text": "This expense is approved"
+            }
+          ]
+        }
+      },
+      "Reassuring": {
+        "shorter": {
+          "parts": [
+            {
+              "label": "Message",
+              "text": "Done. Expense approved."
+            }
+          ]
+        },
+        "casual": {
+          "parts": [
+            {
+              "label": "Message",
+              "text": "All set. You approved this one."
+            }
+          ]
+        },
+        "formal": {
+          "parts": [
+            {
+              "label": "Message",
+              "text": "Done. This expense has been approved."
+            }
+          ]
+        },
+        "again": {
+          "parts": [
+            {
+              "label": "Message",
+              "text": "That's done. Expense approved."
+            }
+          ]
+        }
+      },
+      "Concise": {
+        "shorter": {
+          "parts": [
+            {
+              "label": "Message",
+              "text": "Done"
+            }
+          ]
+        },
+        "casual": {
+          "parts": [
+            {
+              "label": "Message",
+              "text": "You've approved it"
+            }
+          ]
+        },
+        "formal": {
+          "parts": [
+            {
+              "label": "Message",
+              "text": "You have approved it"
+            }
+          ]
+        },
+        "again": {
+          "parts": [
+            {
+              "label": "Message",
+              "text": "It's approved"
+            }
+          ]
+        }
+      }
+    },
+    "ledgerly/tooltip": {
+      "Direct": {
+        "shorter": {
+          "parts": [
+            {
+              "label": "Text",
+              "text": "We won't show this publicly."
+            }
+          ]
+        },
+        "casual": {
+          "parts": [
+            {
+              "label": "Text",
+              "text": "This won't show up publicly."
+            }
+          ]
+        },
+        "formal": {
+          "parts": [
+            {
+              "label": "Text",
+              "text": "This information will not be displayed publicly."
+            }
+          ]
+        },
+        "again": {
+          "parts": [
+            {
+              "label": "Text",
+              "text": "We don't share this information publicly."
+            }
+          ]
+        }
+      },
+      "Reassuring": {
+        "shorter": {
+          "parts": [
+            {
+              "label": "Text",
+              "text": "Enter this with confidence: it won't be public."
+            }
+          ]
+        },
+        "casual": {
+          "parts": [
+            {
+              "label": "Text",
+              "text": "Go ahead and add this, since it won't be made public."
+            }
+          ]
+        },
+        "formal": {
+          "parts": [
+            {
+              "label": "Text",
+              "text": "You may enter this information with confidence, as it will not be made public."
+            }
+          ]
+        },
+        "again": {
+          "parts": [
+            {
+              "label": "Text",
+              "text": "You can share this here, knowing it won't be made public."
+            }
+          ]
+        }
+      },
+      "Concise": {
+        "shorter": {
+          "parts": [
+            {
+              "label": "Text",
+              "text": "Not public."
+            }
+          ]
+        },
+        "casual": {
+          "parts": [
+            {
+              "label": "Text",
+              "text": "Won't be public."
+            }
+          ]
+        },
+        "formal": {
+          "parts": [
+            {
+              "label": "Text",
+              "text": "Not disclosed publicly."
+            }
+          ]
+        },
+        "again": {
+          "parts": [
+            {
+              "label": "Text",
+              "text": "Not visible to the public."
+            }
+          ]
+        }
+      }
+    },
+    "pawpal/error": {
+      "Direct": {
+        "shorter": {
+          "parts": [
+            {
+              "label": "Title",
+              "text": "No walkers available"
+            },
+            {
+              "label": "Body",
+              "text": "Try the next available time."
+            },
+            {
+              "label": "Button",
+              "text": "Find next time"
+            }
+          ]
+        },
+        "casual": {
+          "parts": [
+            {
+              "label": "Title",
+              "text": "No walkers free"
+            },
+            {
+              "label": "Body",
+              "text": "Nobody's free right now. Grab the next available time."
+            },
+            {
+              "label": "Button",
+              "text": "Find next time"
+            }
+          ]
+        },
+        "formal": {
+          "parts": [
+            {
+              "label": "Title",
+              "text": "No walkers available"
+            },
+            {
+              "label": "Body",
+              "text": "No dog walkers or sitters are available at this time. Please choose the next available time."
+            },
+            {
+              "label": "Button",
+              "text": "Find next available time"
+            }
+          ]
+        },
+        "again": {
+          "parts": [
+            {
+              "label": "Title",
+              "text": "Walkers are all booked"
+            },
+            {
+              "label": "Body",
+              "text": "No dog walkers or sitters are free at the moment. Check the next available time."
+            },
+            {
+              "label": "Button",
+              "text": "Find next time"
+            }
+          ]
+        }
+      },
+      "Reassuring": {
+        "shorter": {
+          "parts": [
+            {
+              "label": "Title",
+              "text": "Nobody's free just yet"
+            },
+            {
+              "label": "Body",
+              "text": "Let's find your next best slot."
+            },
+            {
+              "label": "Button",
+              "text": "See next time"
+            }
+          ]
+        },
+        "casual": {
+          "parts": [
+            {
+              "label": "Title",
+              "text": "Nobody's free right now"
+            },
+            {
+              "label": "Body",
+              "text": "All the walkers and sitters are taken for this time. Let's find you another slot."
+            },
+            {
+              "label": "Button",
+              "text": "See next time"
+            }
+          ]
+        },
+        "formal": {
+          "parts": [
+            {
+              "label": "Title",
+              "text": "No one is available yet"
+            },
+            {
+              "label": "Body",
+              "text": "No walkers or sitters are available at this time. We can help you find the next available slot."
+            },
+            {
+              "label": "Button",
+              "text": "See next available time"
+            }
+          ]
+        },
+        "again": {
+          "parts": [
+            {
+              "label": "Title",
+              "text": "Everyone's busy for now"
+            },
+            {
+              "label": "Body",
+              "text": "No walkers or sitters are free at this time. We'll help you find the next slot."
+            },
+            {
+              "label": "Button",
+              "text": "See next time"
+            }
+          ]
+        }
+      },
+      "Playful": {
+        "shorter": {
+          "parts": [
+            {
+              "label": "Title",
+              "text": "All paws are busy"
+            },
+            {
+              "label": "Body",
+              "text": "Pick the next open time."
+            },
+            {
+              "label": "Button",
+              "text": "Find next time"
+            }
+          ]
+        },
+        "casual": {
+          "parts": [
+            {
+              "label": "Title",
+              "text": "All paws are busy"
+            },
+            {
+              "label": "Body",
+              "text": "Every walker and sitter has their paws full. Grab the next open time."
+            },
+            {
+              "label": "Button",
+              "text": "Find next time"
+            }
+          ]
+        },
+        "formal": {
+          "parts": [
+            {
+              "label": "Title",
+              "text": "All walkers are booked"
+            },
+            {
+              "label": "Body",
+              "text": "Every walker and sitter is currently booked. Please select the next open time."
+            },
+            {
+              "label": "Button",
+              "text": "Find next time"
+            }
+          ]
+        },
+        "again": {
+          "parts": [
+            {
+              "label": "Title",
+              "text": "Paws are full right now"
+            },
+            {
+              "label": "Body",
+              "text": "Every walker and sitter is booked. Let's sniff out the next open time."
+            },
+            {
+              "label": "Button",
+              "text": "Find next time"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

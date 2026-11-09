@@ -69,7 +69,7 @@ How the demo data is collected, at no cost:
 1. In the Prompt lab, run at least one case per element for Ledgerly, plus the two Pawpal cases. Score each run.
 2. Rerun any element whose results wouldn't ship.
 3. Copy the log and paste it into Claude Code, which turns the best run per element into `data/demo-results.json`.
-4. For the refine actions (Shorter, More casual, More formal, Try again), Claude Code writes one variant per action for each option, following `prompts/write.md`. Stored in the same file.
+4. For the refine actions (Shorter, More casual, More formal, Try again), Claude Code writes one variant per action for each option, following `prompts/write.md`. Stored in `data/demo-refinements.json` (see Decisions).
 
 When a visitor types their own situation, show the saved results for that element. The demo note above covers both points (saved examples, nothing sent).
 
@@ -128,3 +128,4 @@ Running costs are zero: no API key, free Vercel and GitHub plans, and Claude Cod
 - No screenshot context in v1.
 - The design system README still mentions tone chips and pasting copy; those predate these decisions. Follow this brief.
 - Results header simplified: the heading is "Three ways to say it" with nothing under it. The voice line, the "written for" line and the two demo lines were removed; one note after "Left out on purpose" keeps the Honesty rule.
+- Refine variants live in their own file, `data/demo-refinements.json`, keyed by product/element, approach and action, so `npm run demo-data` never overwrites them. Each variant is made from the original option. A one-word button that can't get shorter keeps its text and says "Already as short as it gets". After Try again the card says "New version".
