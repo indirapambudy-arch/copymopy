@@ -39,11 +39,27 @@
   --spacing-control-lg: 44px;
   --spacing-control-md: 36px;
   --spacing-control-sm: 28px;
+  /* Field sizes from the component docs: 40px inputs, 88px text areas, room for the select chevron */
+  --spacing-input: 40px;
+  --spacing-textarea: 88px;
+  --spacing-chevron-gutter: 40px;
+  /* Write screen sizes from the canvas: header height, product pill height */
+  --spacing-header: 64px;
+  --spacing-pill: 32px;
+  --spacing-form-column: 432px;
   /* Icons follow the text size around them */
   --spacing-icon: 1em;
 
-  /* Widest content column: max-w-page */
+  /* Widths: max-w-page (component preview), max-w-layout (Write screen),
+     max-w-form (left column content), max-w-field (Element dropdown), max-w-empty-text */
   --container-page: 960px;
+  --container-layout: 1200px;
+  --container-form: 528px;
+  --container-field: 400px;
+  --container-empty-text: 32ch;
+
+  /* Screen width where the Write screen splits into two columns: split:… (wider than 900px) */
+  --breakpoint-split: 901px;
 
   /* Letter spacing for the logo wordmark */
   --tracking-logo: -0.03em;
@@ -60,6 +76,9 @@
   --shadow-*: initial;
   --shadow-lg: 0 4px 12px #2121211f, 0 12px 32px -4px #21212129;
   --shadow-focus-ring: 0 0 0 2px var(--color-white-main), 0 0 0 4px var(--color-blue-main);
+  /* Fields: a 1px border plus this 1px shadow reads as the 2px focus or error border, without the text shifting */
+  --shadow-field-focus: 0 0 0 1px var(--color-blue-main);
+  --shadow-field-error: 0 0 0 1px var(--color-red-main);
 
   /* Type: text-heading-32, text-body-16, text-caption-12-bold … (size, line height and weight together) */
   --text-*: initial;
@@ -97,6 +116,7 @@
   --text-caption-12--line-height: 16px;
   --text-caption-12--font-weight: 400;
   /* Icon sizes from the component docs (icons are sized by font-size) */
+  --text-icon-lg: 32px;
   --text-icon-md: 20px;
   --text-icon-sm: 18px;
 
@@ -112,5 +132,37 @@
 @layer base {
   body {
     @apply bg-bg-page font-sans text-body-16 text-grey-main antialiased;
+  }
+}
+
+/*
+  Write screen columns, from docs/canvas/write-screen.html.
+  Content lines up in a 1200px column, while the white (left) and grey (right)
+  backgrounds run to the edges of the window. At 900px and below the two stack.
+*/
+@layer components {
+  .write-left {
+    flex: 0 1 auto;
+    max-width: 100%;
+    width: calc(max(var(--spacing-8), (100% - var(--container-layout)) / 2) + var(--spacing-form-column));
+    padding: var(--spacing-8) var(--spacing-8) var(--spacing-8)
+      max(var(--spacing-8), (100% - var(--container-layout)) / 2);
+    background: var(--color-white-main);
+  }
+  .write-right {
+    flex: 1 1 420px;
+    min-width: 0;
+    padding: var(--spacing-8) max(var(--spacing-8), (100% - var(--container-layout)) / 2)
+      var(--spacing-8) var(--spacing-8);
+    background: var(--color-bg-page);
+  }
+  @media (max-width: 900px) {
+    .write-left {
+      width: 100%;
+      padding: var(--spacing-4) var(--spacing-4) var(--spacing-8);
+    }
+    .write-right {
+      padding: var(--spacing-6) var(--spacing-4) var(--spacing-8);
+    }
   }
 }
