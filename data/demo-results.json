@@ -1,0 +1,105 @@
+{
+  "about": "Saved Claude results from the Prompt lab (instructions v-3500), shown on the demo site. Each `reply` has the same shape as the AI's reply, so live AI can replace this file later. Source runs are in prompt-lab-log.json.",
+  "results": [
+    {
+      "product": "ledgerly",
+      "element": "error",
+      "case": "Card payment failed (no facts)",
+      "version": "v-3500",
+      "at": "2026-11-09T08:54:30.819Z",
+      "inputs": {
+        "what": "The card payment for a subscription failed at checkout",
+        "next": "Try again or use another card"
+      },
+      "reply": {
+        "options": [
+          {
+            "approach": "Direct",
+            "recommended": true,
+            "why": "Pick this for most screens where you want to state the problem and next step plainly.",
+            "parts": [
+              { "label": "Title", "text": "Payment didn't go through" },
+              { "label": "Body", "text": "Your card payment failed at checkout. Try again or use another card." },
+              { "label": "Button", "text": "Try again" }
+            ]
+          },
+          {
+            "approach": "Reassuring",
+            "recommended": false,
+            "why": "Pick this when the reader may worry about their payment or card.",
+            "parts": [
+              { "label": "Title", "text": "Payment wasn't completed" },
+              { "label": "Body", "text": "The card payment didn't go through at checkout. You can try again or choose a different card." },
+              { "label": "Button", "text": "Try again" }
+            ]
+          },
+          {
+            "approach": "Concise",
+            "recommended": false,
+            "why": "Pick this for small mobile screens, banners or toasts where space is tight.",
+            "parts": [
+              { "label": "Title", "text": "Card payment failed" },
+              { "label": "Body", "text": "Try again, or use another card." },
+              { "label": "Button", "text": "Use another card" }
+            ]
+          }
+        ],
+        "left_out": [
+          "The reason the card payment failed (for example declined, expired or network issue), since it wasn't provided.",
+          "Whether the reader was charged or whether their cart or details were saved, since no facts were given.",
+          "Any support contact or help link, since none was provided."
+        ]
+      }
+    },
+    {
+      "product": "pawpal",
+      "element": "error",
+      "case": "Own case",
+      "version": "v-3500",
+      "at": "2026-11-09T11:55:32.250Z",
+      "inputs": {
+        "what": "There's no available dog walkers and sitters",
+        "next": "Find the next available time"
+      },
+      "reply": {
+        "options": [
+          {
+            "approach": "Direct",
+            "recommended": true,
+            "why": "Pick this for most screens, where busy owners need the facts and next step fast.",
+            "parts": [
+              { "label": "Title", "text": "No walkers available" },
+              { "label": "Body", "text": "No dog walkers or sitters are free right now. Try the next available time." },
+              { "label": "Button", "text": "Find next time" }
+            ]
+          },
+          {
+            "approach": "Reassuring",
+            "recommended": false,
+            "why": "Pick this when owners may feel stressed about a last-minute booking.",
+            "parts": [
+              { "label": "Title", "text": "Nobody's free just yet" },
+              { "label": "Body", "text": "No walkers or sitters are available for this time. Let's find your next best slot." },
+              { "label": "Button", "text": "See next time" }
+            ]
+          },
+          {
+            "approach": "Playful",
+            "recommended": false,
+            "why": "Pick this for lighter moments where the brand's playful side can shine.",
+            "parts": [
+              { "label": "Title", "text": "All paws are busy" },
+              { "label": "Body", "text": "Every walker and sitter is booked right now. Pick the next open time." },
+              { "label": "Button", "text": "Find next time" }
+            ]
+          }
+        ],
+        "left_out": [
+          "Did not mention how far ahead the next available time is, since no timeline was given.",
+          "Did not mention notifications, waitlists or other ways to get a walker, since none were listed.",
+          "Did not mention a cause (such as location or date), since only 'no available walkers and sitters' was given."
+        ]
+      }
+    }
+  ]
+}

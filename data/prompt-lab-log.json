@@ -1,0 +1,226 @@
+{
+  "instructions": {
+    "version": "v-3500",
+    "text": "You are Copymopy, a UX writing assistant for product designers.\nWrite UI copy for the element and situation described below.\n\nApproaches\n- Write exactly three options. Each must take a genuinely different approach (for example: direct, reassuring, concise). Do not write three rewordings of the same idea.\n- Name each approach in 1–3 words.\n- Mark exactly one option as recommended: the one that best fits most screens for this product.\n- For each option, write one sentence (max 15 words) on when a designer would pick it.\n\nFacts\n- Only state facts the designer gave you in the situation or under “facts”.\n- Never promise refunds, charges, saved data, timelines or product behavior that isn’t listed. If the copy would be better with a fact you don’t have, leave it out and mention it in “left_out”.\n\nVoice and style\n- Follow the product’s brand personality and voice notes.\n- Sentence case. Plain words. Active voice. Address the reader as “you”.\n- No exclamation marks unless the voice is playful. No emoji. No jargon from the product’s internals.\n- Errors say what happened and how to fix it, without blaming the reader or apologizing at length.\n- Buttons start with a verb and say exactly what happens.\n\nFormat\n- Respect the length guidance for the element.\n- Return exactly the parts listed for the element, in that order, with those labels."
+  },
+  "runs": [
+    {
+      "at": "2026-11-09T11:56:27.017Z",
+      "version": "v-3500",
+      "case": "IBAN field",
+      "product": "Ledgerly",
+      "element": "Helper text",
+      "inputs": {
+        "what": "IBAN for reimbursements",
+        "next": "Adding spaces or leaving out the country code"
+      },
+      "options": [
+        {
+          "approach": "Direct",
+          "recommended": true,
+          "why": "Pick this for most screens: it states the format rule plainly in one line.",
+          "parts": [{ "label": "Text", "text": "Start with the two-letter country code, like DE or GB." }],
+          "score": { "voice": true }
+        },
+        {
+          "approach": "Example-led",
+          "recommended": false,
+          "why": "Pick this when seeing a real format helps more than reading a rule.",
+          "parts": [{ "label": "Text", "text": "Include the country code at the start, for example GB29NWBK60161331926819." }],
+          "score": {}
+        },
+        {
+          "approach": "Reassuring",
+          "recommended": false,
+          "why": "Pick this when spaces are the main mistake and you want to ease worry.",
+          "parts": [{ "label": "Text", "text": "Enter the full IBAN, starting with the country code. Spaces are fine." }],
+          "score": { "voice": true, "facts": true }
+        }
+      ],
+      "left_out": [
+        "I don't know whether the field accepts or strips spaces, so the Direct and Example-led options don't mention them.",
+        "The Reassuring option says spaces are fine, which only works if the product accepts them. Confirm this before choosing it, or drop that sentence.",
+        "The example IBAN is a format illustration only. Confirm it is acceptable to show, or swap in your own placeholder."
+      ]
+    },
+    {
+      "at": "2026-11-09T11:55:32.250Z",
+      "version": "v-3500",
+      "case": "Own case",
+      "product": "Pawpal",
+      "element": "Error message",
+      "inputs": {
+        "what": "There's no available dog walkers and sitters",
+        "next": "Find the next available time"
+      },
+      "options": [
+        {
+          "approach": "Direct",
+          "recommended": true,
+          "why": "Pick this for most screens, where busy owners need the facts and next step fast.",
+          "parts": [
+            { "label": "Title", "text": "No walkers available" },
+            { "label": "Body", "text": "No dog walkers or sitters are free right now. Try the next available time." },
+            { "label": "Button", "text": "Find next time" }
+          ],
+          "score": { "voice": true, "fits": true, "distinct": true, "facts": true }
+        },
+        {
+          "approach": "Reassuring",
+          "recommended": false,
+          "why": "Pick this when owners may feel stressed about a last-minute booking.",
+          "parts": [
+            { "label": "Title", "text": "Nobody's free just yet" },
+            { "label": "Body", "text": "No walkers or sitters are available for this time. Let's find your next best slot." },
+            { "label": "Button", "text": "See next time" }
+          ],
+          "score": { "voice": true, "fits": true }
+        },
+        {
+          "approach": "Playful",
+          "recommended": false,
+          "why": "Pick this for lighter moments where the brand's playful side can shine.",
+          "parts": [
+            { "label": "Title", "text": "All paws are busy" },
+            { "label": "Body", "text": "Every walker and sitter is booked right now. Pick the next open time." },
+            { "label": "Button", "text": "Find next time" }
+          ],
+          "score": { "voice": true, "facts": true, "fits": true, "distinct": true }
+        }
+      ],
+      "left_out": [
+        "Did not mention how far ahead the next available time is, since no timeline was given.",
+        "Did not mention notifications, waitlists or other ways to get a walker, since none were listed.",
+        "Did not mention a cause (such as location or date), since only 'no available walkers and sitters' was given."
+      ]
+    },
+    {
+      "at": "2026-11-09T09:10:03.054Z",
+      "version": "v-3500",
+      "case": "Own case",
+      "product": "Ledgerly",
+      "element": "Headline",
+      "inputs": {
+        "what": "This is a headline for when a startup founder wants to add their company",
+        "next": "It only takes a second to add a company and it's free"
+      },
+      "options": [
+        {
+          "approach": "Direct",
+          "recommended": true,
+          "why": "Pick this for most screens: it states the action plainly for busy founders.",
+          "parts": [{ "label": "Headline", "text": "Add your company" }],
+          "score": { "voice": true, "facts": true, "fits": true, "distinct": true, "ship": true }
+        },
+        {
+          "approach": "Benefit-led",
+          "recommended": false,
+          "why": "Pick this when you want to stress speed and cost right at the top.",
+          "parts": [{ "label": "Headline", "text": "Add your company in seconds, free" }],
+          "score": { "ship": true, "voice": true, "facts": true, "fits": true, "distinct": true }
+        },
+        {
+          "approach": "Friendly invite",
+          "recommended": false,
+          "why": "Pick this for a warmer first-time moment, like onboarding or an empty state.",
+          "parts": [{ "label": "Headline", "text": "Let's add your company" }],
+          "score": {}
+        }
+      ],
+      "left_out": [
+        "Did not say what happens after the company is added (for example, applying to accelerators or grants), since no product behavior was listed.",
+        "Used 'seconds' for 'only takes a second'; confirm the exact time claim before shipping."
+      ]
+    },
+    {
+      "at": "2026-11-09T09:08:31.488Z",
+      "version": "v-3500",
+      "case": "Own case",
+      "product": "Ledgerly",
+      "element": "Tooltip",
+      "inputs": {
+        "what": "This is a tooltip explaining that the information written in the field won't be disclosed publicly",
+        "next": "Try again or use another card"
+      },
+      "options": [
+        {
+          "approach": "Direct",
+          "recommended": true,
+          "why": "Pick this for most screens where a short, plain statement of privacy is enough.",
+          "parts": [{ "label": "Text", "text": "This information won't be shown publicly." }],
+          "score": { "fits": true, "voice": true }
+        },
+        {
+          "approach": "Reassuring",
+          "recommended": false,
+          "why": "Pick this for sensitive fields where founders may hesitate to share details.",
+          "parts": [{ "label": "Text", "text": "You can enter this with confidence, because it won't be made public." }],
+          "score": { "voice": true }
+        },
+        {
+          "approach": "Concise",
+          "recommended": false,
+          "why": "Pick this when space is tight, such as small fields or mobile layouts.",
+          "parts": [{ "label": "Text", "text": "Not shown publicly." }],
+          "score": {}
+        }
+      ],
+      "left_out": [
+        "Who can see this information (for example, accelerators or grant providers reviewing your application), since that wasn't provided.",
+        "How the information is stored or used, since that wasn't provided.",
+        "The field label, so the copy avoids repeating it. Naming the field could make the tooltip more specific."
+      ]
+    },
+    {
+      "at": "2026-11-09T08:54:30.819Z",
+      "version": "v-3500",
+      "case": "Card payment failed (no facts)",
+      "product": "Ledgerly",
+      "element": "Error message",
+      "inputs": {
+        "what": "The card payment for a subscription failed at checkout",
+        "next": "Try again or use another card"
+      },
+      "options": [
+        {
+          "approach": "Direct",
+          "recommended": true,
+          "why": "Pick this for most screens where you want to state the problem and next step plainly.",
+          "parts": [
+            { "label": "Title", "text": "Payment didn't go through" },
+            { "label": "Body", "text": "Your card payment failed at checkout. Try again or use another card." },
+            { "label": "Button", "text": "Try again" }
+          ],
+          "score": {}
+        },
+        {
+          "approach": "Reassuring",
+          "recommended": false,
+          "why": "Pick this when the reader may worry about their payment or card.",
+          "parts": [
+            { "label": "Title", "text": "Payment wasn't completed" },
+            { "label": "Body", "text": "The card payment didn't go through at checkout. You can try again or choose a different card." },
+            { "label": "Button", "text": "Try again" }
+          ],
+          "score": {}
+        },
+        {
+          "approach": "Concise",
+          "recommended": false,
+          "why": "Pick this for small mobile screens, banners or toasts where space is tight.",
+          "parts": [
+            { "label": "Title", "text": "Card payment failed" },
+            { "label": "Body", "text": "Try again, or use another card." },
+            { "label": "Button", "text": "Use another card" }
+          ],
+          "score": {}
+        }
+      ],
+      "left_out": [
+        "The reason the card payment failed (for example declined, expired or network issue), since it wasn't provided.",
+        "Whether the reader was charged or whether their cart or details were saved, since no facts were given.",
+        "Any support contact or help link, since none was provided."
+      ]
+    }
+  ]
+}

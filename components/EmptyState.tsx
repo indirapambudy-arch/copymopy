@@ -10,11 +10,15 @@ export interface EmptyStateProps {
   children?: ReactNode;
   /** Heading level for the title, so it fits the page outline. Defaults to 3, as in the reference. */
   headingLevel?: 2 | 3;
+  /** "error" colors the icon red-main, for a failed request. */
+  tone?: "default" | "error";
   className?: string;
 }
 
 /** What an area shows before there's anything in it: points to the next step. */
-export function EmptyState({ title, icon = "sparkle", action, children, headingLevel = 3, className }: EmptyStateProps) {
+export function EmptyState({
+  title, icon = "sparkle", action, children, headingLevel = 3, tone = "default", className,
+}: EmptyStateProps) {
   const Heading = headingLevel === 2 ? "h2" : "h3";
   return (
     <div
@@ -23,7 +27,7 @@ export function EmptyState({ title, icon = "sparkle", action, children, headingL
         className,
       )}
     >
-      <span className="text-icon-lg text-grey-secondary">
+      <span className={cx("text-icon-lg", tone === "error" ? "text-red-main" : "text-grey-secondary")}>
         <Icon name={icon} />
       </span>
       <Heading className="text-subheading-18-bold text-grey-main">{title}</Heading>

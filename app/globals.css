@@ -47,6 +47,10 @@
   --spacing-header: 64px;
   --spacing-pill: 32px;
   --spacing-form-column: 432px;
+  /* Result cards: 2px nudges (badge padding, part label gap), skeleton sizes from the reference */
+  --spacing-half: 2px;
+  --spacing-skeleton-eyebrow: 64px;
+  --spacing-skeleton: 96px;
   /* Icons follow the text size around them */
   --spacing-icon: 1em;
 
@@ -63,6 +67,8 @@
 
   /* Letter spacing for the logo wordmark */
   --tracking-logo: -0.03em;
+  /* Letter spacing for uppercase eyebrow labels (result card approach names) */
+  --tracking-eyebrow: 0.04em;
 
   /* Radius: rounded-sm (buttons, inputs), rounded-md (cards), rounded-full (chips) */
   --radius-*: initial;
@@ -119,9 +125,11 @@
   --text-icon-lg: 32px;
   --text-icon-md: 20px;
   --text-icon-sm: 18px;
+  --text-icon-xs: 16px;
 
-  /* Loader spin speed from the reference implementation */
+  /* Loader spin and skeleton pulse speeds from the reference implementation */
   --animate-spin: spin 0.8s linear infinite;
+  --animate-pulse: pulse 1.4s ease-in-out infinite;
 }
 
 /* Inter is loaded in app/layout.tsx and exposed as --font-inter */
