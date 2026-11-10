@@ -48,6 +48,8 @@ async function copyText(text: string): Promise<boolean> {
     await navigator.clipboard.writeText(text);
     return true;
   } catch {
+    // Selecting the hidden text moves focus to it, so remember where focus was and put it back.
+    const returnFocus = document.activeElement as HTMLElement | null;
     const area = document.createElement("textarea");
     area.value = text;
     area.setAttribute("readonly", "");
@@ -56,6 +58,7 @@ async function copyText(text: string): Promise<boolean> {
     area.select();
     const ok = document.execCommand("copy");
     area.remove();
+    returnFocus?.focus({ preventScroll: true });
     return ok;
   }
 }
