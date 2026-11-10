@@ -51,6 +51,10 @@
   --spacing-half: 2px;
   --spacing-skeleton-eyebrow: 64px;
   --spacing-skeleton: 96px;
+  /* Product menu: smallest width of the open menu, from the canvas */
+  --spacing-menu: 220px;
+  /* Toast distance from the bottom of the window, clear of the Products save bar */
+  --spacing-toast: 96px;
   /* Icons follow the text size around them */
   --spacing-icon: 1em;
 
@@ -61,6 +65,9 @@
   --container-form: 528px;
   --container-field: 400px;
   --container-empty-text: 32ch;
+  /* Onboarding column and the Products page form, from the canvas */
+  --container-onboarding: 520px;
+  --container-product-form: 680px;
 
   /* Screen width where the Write screen splits into two columns: split:… (wider than 900px) */
   --breakpoint-split: 901px;
@@ -85,6 +92,8 @@
   /* Fields: a 1px border plus this 1px shadow reads as the 2px focus or error border, without the text shifting */
   --shadow-field-focus: 0 0 0 1px var(--color-blue-main);
   --shadow-field-error: 0 0 0 1px var(--color-red-main);
+  /* Selected Chip: an inner 1px line that makes the blue border read as 2px */
+  --shadow-chip-selected: inset 0 0 0 1px var(--color-blue-main);
 
   /* Type: text-heading-32, text-body-16, text-caption-12-bold … (size, line height and weight together) */
   --text-*: initial;

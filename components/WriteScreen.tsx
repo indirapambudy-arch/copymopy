@@ -1,13 +1,17 @@
 "use client";
 
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { elements, getElement, defaultElementId, type ElementId, type QuestionKey } from "@/lib/elements";
-import { demoProduct } from "@/lib/products";
-import { findDemoResult, type SavedResult } from "@/lib/results";
+import { elements, getElement, type ElementId, type QuestionKey } from "@/lib/elements";
+import { loadDraft, saveDraft } from "@/lib/draft";
+import { currentProduct, useProducts } from "@/lib/products";
+import { findDemoResult, hasDemoResults, type SavedResult } from "@/lib/results";
 import { AppHeader } from "./AppHeader";
 import { Button } from "./Button";
 import { Dropdown } from "./Dropdown";
 import { EmptyState } from "./EmptyState";
+import { ProductMenu } from "./ProductMenu";
 import { ResultOptions } from "./ResultOptions";
 import { ResultSkeleton } from "./ResultSkeleton";
 import { TextArea } from "./TextArea";
@@ -23,7 +27,7 @@ type Screen =
   /** `run` counts each Write copy, so refined cards start fresh every time. */
   | { kind: "results"; result: SavedResult; run: number }
   | { kind: "error" }
-  /** No saved results for this product and element (a fallback for products added in slice 6). */
+  /** No saved results for this product and element (products people add, and some Pawpal elements). */
   | { kind: "not-saved"; elementLabel: string };
 
 /** Add ?demo=error to the address to see the error state; nothing can really fail in the demo. */
@@ -32,9 +36,11 @@ function demoShouldFail() {
 }
 
 export function WriteScreen() {
-  const product = demoProduct;
-  const [elementId, setElementId] = useState<ElementId>(defaultElementId);
-  const [answers, setAnswers] = useState<Partial<Record<QuestionKey, string>>>({});
+  const router = useRouter();
+  const snapshot = useProducts();
+  // The form only renders in the browser (after products load), so reading the saved draft here is safe.
+  const [elementId, setElementId] = useState<ElementId>(() => loadDraft().elementId);
+  const [answers, setAnswers] = useState<Partial<Record<QuestionKey, string>>>(() => loadDraft().answers);
   const [fieldError, setFieldError] = useState("");
   const [screen, setScreen] = useState<Screen>({ kind: "empty" });
   const firstFieldRef = useRef<HTMLTextAreaElement>(null);
@@ -43,8 +49,29 @@ export function WriteScreen() {
 
   useEffect(() => () => clearTimeout(timer.current), []);
 
+  // Keep the draft in this browser as it changes.
+  useEffect(() => saveDraft({ elementId, answers }), [elementId, answers]);
+
+  // First visit: set up a product before writing.
+  useEffect(() => {
+    if (snapshot && !snapshot.onboarded) router.replace("/onboarding");
+  }, [snapshot, router]);
+
+  // Switching products clears results written for the previous one.
+  const productId = snapshot?.onboarded ? snapshot.state.currentId : null;
+  const [shownFor, setShownFor] = useState(productId);
+  if (productId !== shownFor) {
+    setShownFor(productId);
+    clearTimeout(timer.current);
+    setScreen({ kind: "empty" });
+  }
+
   const element = getElement(elementId);
   const isLoading = screen.kind === "loading";
+
+  // Products load from this browser after the first paint; show a blank page until then.
+  if (!snapshot?.onboarded) return <div className="min-h-screen bg-white-main" />;
+  const product = currentProduct(snapshot.state);
 
   function write() {
     if (isLoading) return;
@@ -70,13 +97,15 @@ export function WriteScreen() {
 
   // One live region for status changes, so screen readers hear each one once.
   const announcement =
-    screen.kind === "loading" ? "Writing your copy…"
+    screen.kind === "loading" ? "Getting the saved examples…"
     : screen.kind === "results" ? "Your copy is ready: three options."
     : "";
 
   return (
     <div className="flex min-h-screen flex-col bg-white-main">
-      <AppHeader productName={product.name} />
+      <AppHeader>
+        <ProductMenu label="Writing for" state={snapshot.state} />
+      </AppHeader>
 
       <main className="flex grow flex-wrap items-stretch">
         <section aria-labelledby="write-title" className="write-left">
@@ -126,8 +155,20 @@ export function WriteScreen() {
 
             <div className="flex flex-col gap-2">
               <p className="text-caption-14 text-grey-secondary">
-                Using {product.name}’s voice:{" "}
-                <b className="font-semibold text-grey-main">{product.personality.join(", ")}</b>
+                Using {product.name}’s voice
+                {product.personality.length > 0 && (
+                  <>
+                    : <b className="font-semibold text-grey-main">{product.personality.join(", ")}</b>
+                  </>
+                )}
+                {" · "}
+                <Link
+                  href="/products"
+                  aria-label={`Edit ${product.name}’s voice`}
+                  className="rounded-sm text-blue-main underline-offset-2 hover:text-blue-hover hover:underline focus-visible:outline-2 focus-visible:outline-transparent focus-visible:shadow-focus-ring"
+                >
+                  Edit
+                </Link>
               </p>
               <Button type="submit" size="lg" icon="sparkles" loading={isLoading} className="w-full">
                 Write copy
@@ -151,7 +192,7 @@ export function WriteScreen() {
 
             {screen.kind === "loading" && (
               <>
-                <h2 className="text-subheading-18-bold">Writing your copy…</h2>
+                <h2 className="text-subheading-18-bold">Getting the saved examples…</h2>
                 {[0, 1, 2].map((i) => (
                   <ResultSkeleton key={i} />
                 ))}
@@ -205,8 +246,9 @@ export function WriteScreen() {
             {screen.kind === "not-saved" && (
               <div role="status">
                 <EmptyState title={`No saved examples for ${screen.elementLabel} yet`} headingLevel={2}>
-                  This demo has saved results for {product.name} only for some elements. Pick another element to
-                  see three approaches.
+                  {hasDemoResults(product.id)
+                    ? `This demo has saved results for ${product.name} only for some elements. Pick another element to see three approaches.`
+                    : "This demo only has saved results for Ledgerly and Pawpal. Switch products in the menu at the top to see three approaches."}
                 </EmptyState>
               </div>
             )}

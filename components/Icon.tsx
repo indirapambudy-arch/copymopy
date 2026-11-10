@@ -13,15 +13,23 @@ export type IconName =
   | "pencil"
   | "sparkle"
   | "sparkles"
-  | "alert";
+  | "alert"
+  | "arrow-left";
 
 export const iconNames: IconName[] = [
   "copy", "check", "refresh", "loader", "close", "chevron-down",
-  "upload", "file", "pencil", "sparkle", "sparkles", "alert",
+  "upload", "file", "pencil", "sparkle", "sparkles", "alert", "arrow-left",
 ];
 
 // 24px grid, 2px rounded stroke. Drawn with currentColor.
 const paths: Record<IconName, ReactElement> = {
+  // From the "Back to writing" link in docs/canvas/products.html.
+  "arrow-left": (
+    <>
+      <path d="M19 12H5" />
+      <path d="M12 19l-7-7 7-7" />
+    </>
+  ),
   copy: (
     <>
       <rect x={9} y={9} width={12} height={12} rx={2} />

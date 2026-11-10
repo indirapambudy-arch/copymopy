@@ -1,6 +1,6 @@
 "use client";
 
-import type { ButtonHTMLAttributes, MouseEvent } from "react";
+import type { ButtonHTMLAttributes, MouseEvent, Ref } from "react";
 import { cx } from "@/lib/cx";
 import { Icon, type IconName } from "./Icon";
 
@@ -10,6 +10,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** Shows the spinner, keeps the label for screen readers and blocks clicks. */
   loading?: boolean;
   icon?: IconName;
+  ref?: Ref<HTMLButtonElement>;
 }
 
 const base =

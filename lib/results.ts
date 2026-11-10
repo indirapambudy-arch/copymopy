@@ -38,6 +38,11 @@ export function findDemoResult(productId: string, element: ElementId): SavedResu
   return saved.find((r) => r.product === productId && r.element === element);
 }
 
+/** Whether this product has any saved results at all (only Ledgerly and Pawpal do). */
+export function hasDemoResults(productId: string): boolean {
+  return saved.some((r) => r.product === productId);
+}
+
 /** The refine actions under each result card, in order. `note` shows after the approach name once applied. */
 export const refineActions = [
   { value: "shorter", label: "Shorter", note: "Shorter" },
